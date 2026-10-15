@@ -1,0 +1,31 @@
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#horizantal-container {
+    display: flex;
+    margin: 32px;
+    width: 100%;
+    gap: 8px;
+}
+#search {
+    flex-grow: 1;
+}
+#categories-container {
+    width: 100%;
+    display: flex;
+    gap: 16px;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+.DIY-category {
+ align-self: last baseline;
+}
+.category {
+    background-color: violet;
+    width: 88px;
+    text-align: center;
+}
