@@ -2,9 +2,12 @@ selectedColor = "red";
 unSelectedColor = "rgb(238, 130, 238)";
 selectedCount = 0;
 selectedCategories = 5;
-rounds = selectedCategories * 5;
+MaxRounds = selectedCategories * 5;
 points = null;
+rounds = 1
 lifeline = 0;
+team1 = true;
+
 const startBtnElement = document.querySelectorAll(".start-btn");
 const categoryElement = document.querySelectorAll(".category");
 const teamNameElement = document.querySelectorAll(".team-names");
@@ -13,7 +16,8 @@ const pointsCheckBoxElement = document.querySelector("#points");
 const roundsAmountElement = document.querySelector("#rounds-amount");
 const pointsAmountElement = document.querySelector("#points-amount");
 const lifelineElement = document.querySelectorAll(".lifeline");
-const QElement = document.querySelectorAll('Q')
+const QElement = document.querySelectorAll('td')
+const gameRoundsElement = document.querySelector('#game-rounds')
 
 
 startBtnElement.forEach((button) => {
@@ -67,19 +71,25 @@ function selectLifeline(event) {
   }
 }
 function selectQ(event) {
-  console.log("slecet lifeline");
+  console.log("slecet Q");
   let color = getComputedStyle(event.currentTarget).backgroundColor;
   console.log(color);
   if (color === unSelectedColor) {
-    event.currentTarget.style.backgroundColor = "red";
-    lifeline++;
-    console.log(lifeline);
-  } else {
-    event.currentTarget.style.backgroundColor = "violet";
-    color = false;
-    lifeline--;
-    console.log("lifelines:" + lifeline);
+    if(team1)
+    {event.currentTarget.style.backgroundColor = "green";
+    team1 = false
+    console.log(rounds);}
+    else {
+    event.currentTarget.style.backgroundColor = "yellow";
+    team1 = true;
+    rounds++;
+    roundDisplay()
+    console.log("rounds:" + rounds);
   }
+  } 
+}
+function roundDisplay(){
+  gameRoundsElement.innerHTML = rounds;
 }
 function checkGameSettings() {
   console.log("settings");
