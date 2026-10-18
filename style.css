@@ -49,3 +49,9 @@ main {
     display: flex;
     justify-content: space-between;
 }
+#rounds-amount {
+    
+}
+.lifeline {
+    background-color: violet;
+}
