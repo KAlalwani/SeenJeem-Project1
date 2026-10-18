@@ -70,23 +70,7 @@ main {
     margin-bottom: 8px;
 
 }
-.timer{
-  width: 100%;
-  height: 20px;
-  background-color: lightgray;
-  overflow: hidden;
-}
-.timer-bar {
-  width: 100%;
-  height: 100%;
-  background-color: green;
-  transition: width 1s linear;
-}
-.action-btns{
-    width:fit-content;
-    display: flex;
 
-}
 .team-side {
     display: flex;
     flex-direction: column;
@@ -104,4 +88,23 @@ th, td {
 }
 td {
     background-color: violet;
+}
+
+/* Question */
+.timer{
+  width: 100%;
+  height: 20px;
+  background-color: lightgray;
+  overflow: hidden;
+}
+.timer-bar {
+  width: 100%;
+  height: 100%;
+  background-color: green;
+  transition: width 1s linear;
+}
+.action-btns{
+    width:fit-content;
+    display: flex;
+
 }

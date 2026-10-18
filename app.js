@@ -20,23 +20,7 @@ const QElement = document.querySelectorAll('td')
 const gameRoundsElement = document.querySelector('#game-rounds')
 const timeBarElement = document.querySelector('.timer-bar');
 
-let timeLeft = 20;
-const totalTime = 20;
 
-const timer = setInterval(() => {
-  timeLeft--;
-
-  timeBarElement.style.width = `${(timeLeft / totalTime) * 100}%`;
-
-  if (timeLeft <= 5) {
-    timeBarElement.style.backgroundColor = "red";
-  }
-
-  if (timeLeft <= 0) {
-    clearInterval(timer);
-    console.log("Time's up!");
-  }
-}, 1000);
 
 startBtnElement.forEach((button) => {
   button.addEventListener("click", nextPage);
@@ -96,10 +80,15 @@ function selectQ(event) {
     if(team1)
     {event.currentTarget.style.backgroundColor = "green";
     team1 = false
-    console.log(rounds);}
+    console.log(rounds);
+    window.location.href = './question.html'
+
+  }
     else {
     event.currentTarget.style.backgroundColor = "yellow";
     team1 = true;
+      window.location.href = './question.html'
+
     rounds++;
     roundDisplay()
     console.log("rounds:" + rounds);
@@ -118,6 +107,31 @@ function checkGameSettings() {
     pointsAmountElement.disabled = true;
   if (roundsCheckBoxElement.checked) roundsAmountElement.disabled = false;
   else if (!roundsCheckBoxElement.checked) roundsAmountElement.disabled = true;
+}
+function question(event){
+  console.log(event.target)
+
+
+
+
+}
+  if(window.location.pathname.includes('question.html')){
+    let timeLeft = 20;
+const totalTime = 20;
+    const timer = setInterval(() => {
+  timeLeft--;
+
+  timeBarElement.style.width = `${(timeLeft / totalTime) * 100}%`;
+
+  if (timeLeft <= 5) {
+    timeBarElement.style.backgroundColor = "red";
+  }
+
+  if (timeLeft < 0) {
+    clearInterval(timer);
+    alert("Time's up!");
+  }
+}, 1000);
 }
 function nextPage(){
   if(window.location.pathname.includes('index.html')){
