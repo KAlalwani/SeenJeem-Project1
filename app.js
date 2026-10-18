@@ -18,7 +18,25 @@ const pointsAmountElement = document.querySelector("#points-amount");
 const lifelineElement = document.querySelectorAll(".lifeline");
 const QElement = document.querySelectorAll('td')
 const gameRoundsElement = document.querySelector('#game-rounds')
+const timeBarElement = document.querySelector('.timer-bar');
 
+let timeLeft = 20;
+const totalTime = 20;
+
+const timer = setInterval(() => {
+  timeLeft--;
+
+  timeBarElement.style.width = `${(timeLeft / totalTime) * 100}%`;
+
+  if (timeLeft <= 5) {
+    timeBarElement.style.backgroundColor = "red";
+  }
+
+  if (timeLeft <= 0) {
+    clearInterval(timer);
+    console.log("Time's up!");
+  }
+}, 1000);
 
 startBtnElement.forEach((button) => {
   button.addEventListener("click", nextPage);
@@ -156,3 +174,4 @@ function nextPage(){
   window.location.href = "./game.html";
 }
 }
+
