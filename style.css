@@ -49,9 +49,51 @@ main {
     display: flex;
     justify-content: space-between;
 }
-#rounds-amount {
-    
-}
+
 .lifeline {
     background-color: violet;
+}
+/* game */
+.body {
+    display: flex;
+    flex-direction: column;
+}
+.main {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.timer-container {
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    margin-bottom: 8px;
+    background-color: blue;
+
+}
+.timer{
+    background-color: chocolate;
+    width: 100%;
+}
+.action-btns{
+    width:fit-content;
+    display: flex;
+    
+}
+.team-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: aqua;
+}
+h1 {
+    text-align: center;
+}
+.game-rounds-conatiner {
+    
+}
+th, td {
+  padding: 16px;
+  text-align: center;
 }

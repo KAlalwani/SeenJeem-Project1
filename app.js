@@ -123,36 +123,3 @@ function nextPage(){
   window.location.href = "./game.html";
 }
 }
-
-// function nextPage() {
-//   console.log(selectedCount);
-//   if (selectedCount > 5) {
-
-//     window.location.href = "./team.html";
-//     selectedCount = 0;
-//   } else if (
-//     teamNameElement.item(1).value != "" &&
-//     teamNameElement.item(0).value != ""
-//   ) {
-//     console.log(teamNameElement.item(0).value);
-//     console.log(teamNameElement.item(1).value);
-//     checkGameSettings();
-//     if (roundsCheckBoxElement.checked) {
-//       if (roundsAmountElement.value > 0 && roundsAmountElement.value < 12) {
-//         rounds = roundsAmountElement.value;
-//         console.log(rounds);
-//       }
-//     }
-//     if (pointsCheckBoxElement.checked) {
-//       if (
-//         pointsAmountElement.value >= 100 &&
-//         pointsAmountElement.value <= 7500
-//       ) {
-//         points = pointsAmountElement.value;
-//         console.log(points);
-//       }
-//     }
-//     if (lifeline > 2) 
-//       window.location.href = "./game.html";
-//   }
-// }
