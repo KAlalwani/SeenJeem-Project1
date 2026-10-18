@@ -29,3 +29,23 @@ main {
     width: 88px;
     text-align: center;
 }
+
+/* team page */
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.teams-container {
+    display: flex;
+    gap:32px;
+    
+}
+#roundsAndPoints{
+    display: flex;
+    gap: 32px;
+}
+#lifelines-container {
+    display: flex;
+    justify-content: space-between;
+}

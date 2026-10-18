@@ -1,6 +1,6 @@
 selectedColor = "red";
 unSelectedColor = "rgb(238, 130, 238)";
-selectedCount = 0
+selectedCount = 0;
 
 const startBtnElement = document.querySelectorAll(".start-btn");
 const categoryElement = document.querySelectorAll(".category");
@@ -30,10 +30,8 @@ function select(event) {
 }
 
 function nextPage() {
-  let url = window.location.href;
-  console.log(url);
-  if (url === "http://127.0.0.1:5500/projects/SeenJeem-Project1/index.html" && selectedCount === 5) {
-    console.log("redirect");
-    window.location.href = "./team.html";
-}
+  console.log(selectedCount);
+  if(selectedCount === 5) {
+      window.location.href = "./team.html";
+  }
 }
