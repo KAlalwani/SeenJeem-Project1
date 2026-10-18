@@ -78,7 +78,7 @@ main {
 .action-btns{
     width:fit-content;
     display: flex;
-    
+
 }
 .team-side {
     display: flex;
@@ -90,10 +90,11 @@ main {
 h1 {
     text-align: center;
 }
-.game-rounds-conatiner {
-    
-}
+
 th, td {
   padding: 16px;
   text-align: center;
+}
+Q {
+    background-color: violet;
 }

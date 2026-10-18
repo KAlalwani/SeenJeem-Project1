@@ -13,20 +13,28 @@ const pointsCheckBoxElement = document.querySelector("#points");
 const roundsAmountElement = document.querySelector("#rounds-amount");
 const pointsAmountElement = document.querySelector("#points-amount");
 const lifelineElement = document.querySelectorAll(".lifeline");
+const QElement = document.querySelectorAll('Q')
+
 
 startBtnElement.forEach((button) => {
   button.addEventListener("click", nextPage);
 });
-
 categoryElement.forEach((category) => {
   category.addEventListener("click", selectCategory);
 });
-
 lifelineElement.forEach((lifeline) => {
   lifeline.addEventListener("click", selectLifeline);
 });
-roundsCheckBoxElement.addEventListener("change", checkGameSettings);
-pointsCheckBoxElement.addEventListener("change", checkGameSettings);
+QElement.forEach((Q) => {
+  Q.addEventListener("click", selectQ);
+});
+if (roundsCheckBoxElement) {
+  roundsCheckBoxElement.addEventListener("change", checkGameSettings);
+}
+
+if (pointsCheckBoxElement) {
+  pointsCheckBoxElement.addEventListener("change", checkGameSettings);
+}
 
 function selectCategory(event) {
   console.log("slecet category");
@@ -44,6 +52,21 @@ function selectCategory(event) {
   }
 }
 function selectLifeline(event) {
+  console.log("slecet lifeline");
+  let color = getComputedStyle(event.currentTarget).backgroundColor;
+  console.log(color);
+  if (color === unSelectedColor) {
+    event.currentTarget.style.backgroundColor = "red";
+    lifeline++;
+    console.log(lifeline);
+  } else {
+    event.currentTarget.style.backgroundColor = "violet";
+    color = false;
+    lifeline--;
+    console.log("lifelines:" + lifeline);
+  }
+}
+function selectQ(event) {
   console.log("slecet lifeline");
   let color = getComputedStyle(event.currentTarget).backgroundColor;
   console.log(color);
