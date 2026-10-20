@@ -76,7 +76,8 @@ if (pointsCheckBoxElement) {
 QChoiceElement.forEach((choice) => {
   choice.addEventListener("click", selectChoice);
 });
-doneBtnElement.addEventListener("click",() => {submitAnwser(usrAns);})
+if (page === "question.html")
+  doneBtnElement.addEventListener("click",() => {submitAnwser(usrAns);})
 
 // ===== Functions =====
 function selectCategory(event) {
@@ -258,8 +259,9 @@ function getRandomQuestion(category) {
 function submitAnwser(usrAns){
   console.log(choice[usrAns])
   if(realAns == choice[usrAns])
-    console.log('winner!')
-  else console.log('loser!')
+    alert('winner!')
+  else alert('loser!')
+  window.location.href ='./game.html'
 }
 
 function nextPage() {
