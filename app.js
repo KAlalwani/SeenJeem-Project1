@@ -47,6 +47,7 @@ const pointsAmountElement = document.querySelector("#points-amount");
 const lifelineElement = document.querySelectorAll(".lifeline");
 const QElement = document.querySelectorAll("td");
 const gameRoundsElement = document.querySelector("#game-rounds");
+const gameTotalRoundsElement = document.querySelector("#game-total-rounds");
 const timeBarElement = document.querySelector(".timer-bar");
 const teamPointsElement = document.querySelectorAll(".team-points");
 const questionElement = document.querySelector("#side-Q > h1");
@@ -176,6 +177,12 @@ function displayGame() {
 function roundDisplay() {
   if (gameRoundsElement) {
     gameRoundsElement.innerHTML = getJSON("rounds", 1);
+  }
+  if (gameTotalRoundsElement) {
+    gameTotalRoundsElement.textContent = getJSON(
+      "totalRounds",
+      selectedCategories * 5,
+    );
   }
 }
 
