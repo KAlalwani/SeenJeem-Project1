@@ -182,7 +182,7 @@ function roundDisplay() {
   if (gameTotalRoundsElement) {
     gameTotalRoundsElement.textContent = getJSON(
       "totalRounds",
-      selectedCategories * 5,
+      Math.floor((selectedCategories * 5) / 2),
     );
   }
 }
@@ -382,7 +382,9 @@ function nextPage() {
 
     checkGameSettings();
 
-    let maxRounds = selectedCategories * 5;
+    // Two teams answer once per round. A 25-question board therefore has
+    // 12 complete rounds, with one question left for the final turn.
+    let maxRounds = Math.floor((selectedCategories * 5) / 2);
     if (roundsCheckBoxElement.checked) {
       if (roundsAmountElement.value <= 0 || roundsAmountElement.value > 12) {
         alert("Rounds must be between 1 and 12.");
