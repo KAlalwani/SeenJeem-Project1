@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-labelledby="title desc">
+  <title id="title">Coding quiz illustration</title>
+  <desc id="desc">A cheerful laptop displaying code symbols.</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e0f2fe"/><stop offset="1" stop-color="#ede9fe"/></linearGradient></defs>
+  <rect width="640" height="480" rx="42" fill="url(#bg)"/>
+  <path d="M139 108h362c25 0 45 20 45 45v201H94V153c0-25 20-45 45-45Z" fill="#172554"/>
+  <rect x="121" y="136" width="398" height="190" rx="17" fill="#0f766e"/>
+  <path d="M94 354h452l42 48c9 11 1 28-14 28H66c-15 0-23-17-14-28Z" fill="#4338ca"/>
+  <path d="M250 390h140" stroke="#a5b4fc" stroke-width="11" stroke-linecap="round"/>
+  <path d="m220 182-45 48 45 48M318 173l-31 117M407 182l45 48-45 48" fill="none" stroke="#fbbf24" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="477" cy="185" r="13" fill="#5eead4"/><circle cx="477" cy="229" r="13" fill="#f472b6"/><circle cx="477" cy="273" r="13" fill="#fbbf24"/>
+  <path d="m116 78 12 27 29 2-22 20 6 29-25-14-26 14 7-29-23-20 30-2Z" fill="#fbbf24"/>
+  <path d="M514 75c-24 0-43 19-43 43 0 33 43 66 43 66s43-33 43-66c0-24-19-43-43-43Z" fill="#ec4899"/>
+  <circle cx="514" cy="118" r="13" fill="#fff"/>
+  <circle cx="113" cy="393" r="34" fill="#5eead4"/><path d="M100 393h26M113 380v26" stroke="#0f766e" stroke-width="8" stroke-linecap="round"/>
+</svg>

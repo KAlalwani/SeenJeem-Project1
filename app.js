@@ -59,6 +59,7 @@ const timeBarElement = document.querySelector(".timer-bar");
 const teamPointsElement = document.querySelectorAll(".team-points");
 const questionElement = document.querySelector("#side-Q > h1");
 const QChoiceElement = document.querySelectorAll(".choice");
+const questionImageElement = document.querySelector("#side-Q-img img");
 const gameNameElement = document.querySelectorAll(".team > span");
 const gameCategoryElement = document.querySelectorAll(".game-category");
 const doneBtnElement = document.querySelector(".done-btn");
@@ -208,6 +209,7 @@ function question() {
     return;
   }
   questionElement.innerHTML = questionData.prompt;
+  displayQuestionImage(questionData.category);
   QChoiceElement.forEach((choice, index) => {
     choice.textContent = questionData.options[index]?.text ?? "";
   });
@@ -215,6 +217,22 @@ function question() {
   console.log(questionData.prompt);
   console.log(questionData.options);
   console.log(questionData.correctOptionId);
+}
+
+function displayQuestionImage(category) {
+  if (!questionImageElement) return;
+
+  const categoryImages = {
+    people: "./images/people-quiz.svg",
+    cartoons: "./images/cartoons-quiz.svg",
+    countries: "./images/countries-quiz.svg",
+    history: "./images/history-quiz.svg",
+    coding: "./images/coding-quiz.svg",
+  };
+  const imageUrl = categoryImages[category] || categoryImages.people;
+
+  questionImageElement.src = imageUrl;
+  questionImageElement.alt = `${category} quiz illustration`;
 }
 
 function displayQuestionLifelines() {

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-labelledby="title desc">
+  <title id="title">History quiz illustration</title>
+  <desc id="desc">A parchment scroll, clock, and ancient monument.</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff7ed"/><stop offset="1" stop-color="#fde68a"/></linearGradient></defs>
+  <rect width="640" height="480" rx="42" fill="url(#bg)"/>
+  <circle cx="472" cy="130" r="83" fill="#fff" stroke="#7c3aed" stroke-width="12"/>
+  <circle cx="472" cy="130" r="9" fill="#7c3aed"/>
+  <path d="M472 130V82M472 130l37 23" fill="none" stroke="#7c3aed" stroke-width="11" stroke-linecap="round"/>
+  <path d="M200 91h198c31 0 49 22 49 49v202c0 27-18 49-49 49H200c-30 0-49-22-49-49V140c0-27 19-49 49-49Z" fill="#fef3c7" stroke="#b45309" stroke-width="10"/>
+  <path d="M176 113c-35 4-44 37-20 61-24 25-15 57 20 62M423 113c35 4 44 37 20 61 24 25 15 57-20 62" fill="none" stroke="#b45309" stroke-width="13" stroke-linecap="round"/>
+  <path d="M211 169h170M211 211h145M211 253h170M211 295h109" stroke="#d97706" stroke-width="12" stroke-linecap="round"/>
+  <path d="m106 421 82-145 82 145Z" fill="#f59e0b"/><path d="m172 421 82-145 82 145Z" fill="#fbbf24"/><path d="m239 421 82-145 82 145Z" fill="#fcd34d"/>
+  <path d="M424 296c20-31 46-42 76-36 31 6 50 24 61 54-46 15-92 12-137-8Z" fill="#0f766e"/>
+  <path d="M478 299c9-28 28-46 59-55" fill="none" stroke="#5eead4" stroke-width="8" stroke-linecap="round"/>
+  <path d="M77 82h70v35H77z" fill="#4338ca"/><path d="M90 64h44v18H90z" fill="#4338ca"/>
+</svg>
