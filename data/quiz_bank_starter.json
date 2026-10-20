@@ -1,0 +1,377 @@
+{
+  "schemaVersion": 1,
+  "notes": [
+    "Use API data to enrich records, but keep playable questions in the local questionBank so gameplay does not depend on an API being online.",
+    "Person age and alive status should be calculated from birthDate/deathDate rather than maintained as stale values.",
+    "For copyrighted cartoon theme songs, store title/credits and an official listening URL; do not store full lyrics."
+  ],
+  "people": [
+    {
+      "id": "person-albert-einstein",
+      "name": "Albert Einstein",
+      "nickname": null,
+      "occupation": ["theoretical physicist"],
+      "birthDate": "1879-03-14",
+      "deathDate": "1955-04-18",
+      "ageRule": "Calculate age at death from birthDate and deathDate.",
+      "isAliveRule": "deathDate is present => false; otherwise true.",
+      "image": { "provider": "Wikipedia REST API", "wikipediaTitle": "Albert Einstein", "url": null },
+      "achievements": ["Awarded the 1921 Nobel Prize in Physics for his services to theoretical physics, especially the discovery of the law of the photoelectric effect."],
+      "funFacts": ["Before his academic career took off, he worked at the Swiss Patent Office in Bern."],
+      "quotes": [],
+      "sources": ["https://en.wikipedia.org/wiki/Albert_Einstein", "https://www.nobelprize.org/prizes/physics/1921/einstein/facts/"]
+    },
+    {
+      "id": "person-marie-curie",
+      "name": "Marie Curie",
+      "nickname": null,
+      "occupation": ["physicist", "chemist"],
+      "birthDate": "1867-11-07",
+      "deathDate": "1934-07-04",
+      "ageRule": "Calculate age at death from birthDate and deathDate.",
+      "isAliveRule": "deathDate is present => false; otherwise true.",
+      "image": { "provider": "Wikipedia REST API", "wikipediaTitle": "Marie Curie", "url": null },
+      "achievements": ["Won the 1903 Nobel Prize in Physics and the 1911 Nobel Prize in Chemistry."],
+      "funFacts": ["She was the first woman to receive a Nobel Prize."],
+      "quotes": [],
+      "sources": ["https://en.wikipedia.org/wiki/Marie_Curie", "https://www.nobelprize.org/prizes/physics/1903/marie-curie/facts/"]
+    }
+  ],
+  "cartoons": [
+    {
+      "id": "cartoon-spongebob-squarepants",
+      "name": "SpongeBob SquarePants",
+      "description": "An animated comedy series about SpongeBob and his friends in the underwater city of Bikini Bottom.",
+      "image": { "provider": "TMDB", "tmdbId": null, "url": null },
+      "firstAirDate": "1999-05-01",
+      "originalNetwork": "Nickelodeon",
+      "otherNetworks": [],
+      "characters": ["SpongeBob SquarePants", "Patrick Star", "Squidward Tentacles", "Sandy Cheeks", "Mr. Krabs"],
+      "mainStoryEvents": ["SpongeBob works as a fry cook at the Krusty Krab.", "Many episodes follow the everyday adventures and mishaps of SpongeBob and his friends."],
+      "themeSong": { "title": "SpongeBob SquarePants Theme Song", "performerOrCredits": null, "officialUrl": null },
+      "lyricsPolicy": "Store song title, credits, quiz clues and official links only; do not store full lyrics.",
+      "funFacts": [],
+      "sources": ["https://en.wikipedia.org/wiki/SpongeBob_SquarePants", "https://developer.themoviedb.org/docs"]
+    },
+    {
+      "id": "cartoon-scooby-doo-where-are-you",
+      "name": "Scooby-Doo, Where Are You!",
+      "description": "An animated mystery-comedy series following a group of friends and their talking Great Dane as they investigate strange happenings.",
+      "image": { "provider": "TMDB", "tmdbId": null, "url": null },
+      "firstAirDate": "1969-09-13",
+      "originalNetwork": "CBS",
+      "otherNetworks": [],
+      "characters": ["Scooby-Doo", "Shaggy Rogers", "Fred Jones", "Daphne Blake", "Velma Dinkley"],
+      "mainStoryEvents": ["The group investigates apparent hauntings and monsters.", "Mysteries typically reveal a human explanation behind the apparent supernatural event."],
+      "themeSong": { "title": null, "performerOrCredits": null, "officialUrl": null },
+      "lyricsPolicy": "Store song title, credits, quiz clues and official links only; do not store full lyrics.",
+      "funFacts": [],
+      "sources": ["https://en.wikipedia.org/wiki/Scooby-Doo,_Where_Are_You!", "https://developer.themoviedb.org/docs"]
+    }
+  ],
+  "countries": [
+    {
+      "id": "country-bahrain",
+      "name": "Bahrain",
+      "iso2": "bh",
+      "capital": "Manama",
+      "flag": {
+        "colorUrl": "https://flagcdn.com/w320/bh.png",
+        "monochromeStrategy": "Use the color flag image with CSS filter: grayscale(1); verify visual contrast before using it in questions."
+      },
+      "coordinates": { "latitude": 26.0667, "longitude": 50.5577 },
+      "shape": { "provider": "World Atlas / Natural Earth country boundaries", "matchByCountryName": "Bahrain", "outlineUrl": null },
+      "funFacts": [],
+      "sources": ["https://restcountries.com/", "https://github.com/topojson/world-atlas"]
+    },
+    {
+      "id": "country-japan",
+      "name": "Japan",
+      "iso2": "jp",
+      "capital": "Tokyo",
+      "flag": {
+        "colorUrl": "https://flagcdn.com/w320/jp.png",
+        "monochromeStrategy": "Use the color flag image with CSS filter: grayscale(1); verify visual contrast before using it in questions."
+      },
+      "coordinates": { "latitude": 36.2048, "longitude": 138.2529 },
+      "shape": { "provider": "World Atlas / Natural Earth country boundaries", "matchByCountryName": "Japan", "outlineUrl": null },
+      "funFacts": [],
+      "sources": ["https://restcountries.com/", "https://github.com/topojson/world-atlas"]
+    },
+    {
+      "id": "country-canada",
+      "name": "Canada",
+      "iso2": "ca",
+      "capital": "Ottawa",
+      "flag": {
+        "colorUrl": "https://flagcdn.com/w320/ca.png",
+        "monochromeStrategy": "Use the color flag image with CSS filter: grayscale(1); verify visual contrast before using it in questions."
+      },
+      "coordinates": { "latitude": 56.1304, "longitude": -106.3468 },
+      "shape": { "provider": "World Atlas / Natural Earth country boundaries", "matchByCountryName": "Canada", "outlineUrl": null },
+      "funFacts": [],
+      "sources": ["https://restcountries.com/", "https://github.com/topojson/world-atlas"]
+    }
+  ],
+  "history": {
+    "events": [
+      {
+        "id": "history-waterloo",
+        "name": "Battle of Waterloo",
+        "date": "1815-06-18",
+        "questionSafeSummary": "A coalition led by the Duke of Wellington and Gebhard Leberecht von Blücher defeated Napoleon's French army.",
+        "winner": "Seventh Coalition",
+        "participants": ["French Empire", "Seventh Coalition"],
+        "sources": ["https://en.wikipedia.org/wiki/Battle_of_Waterloo"]
+      },
+      {
+        "id": "history-sputnik-1",
+        "name": "Launch of Sputnik 1",
+        "date": "1957-10-04",
+        "questionSafeSummary": "The Soviet Union launched Sputnik 1, the first artificial Earth satellite.",
+        "winner": null,
+        "participants": ["Soviet Union"],
+        "sources": ["https://en.wikipedia.org/wiki/Sputnik_1"]
+      },
+      {
+        "id": "history-iphone-announcement",
+        "name": "Original iPhone announced",
+        "date": "2007-01-09",
+        "questionSafeSummary": "Apple announced the first iPhone; it went on sale later that year.",
+        "winner": null,
+        "participants": ["Apple"],
+        "sources": ["https://en.wikipedia.org/wiki/IPhone_(1st_generation)"]
+      }
+    ],
+    "objects": [
+      {
+        "id": "history-object-rotary-phone",
+        "name": "Rotary telephone",
+        "function": "A telephone that places a call by rotating a dial to signal the number being called.",
+        "periodOrContext": "Common before push-button phones became widespread.",
+        "imageSearchQuery": "rotary dial telephone historical photograph",
+        "imageUrl": null,
+        "sources": ["https://en.wikipedia.org/wiki/Rotary_dial"]
+      },
+      {
+        "id": "history-object-telegraph-key",
+        "name": "Telegraph key",
+        "function": "A switch used to send electrical signals, commonly in Morse code, through a telegraph circuit.",
+        "periodOrContext": "Used in telegraphy before modern digital communication.",
+        "imageSearchQuery": "Morse telegraph key historical artifact",
+        "imageUrl": null,
+        "sources": ["https://en.wikipedia.org/wiki/Telegraphy"]
+      }
+    ]
+  },
+  "questionBank": [
+    {
+      "id": "people-001",
+      "category": "people",
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Which field was Albert Einstein best known for?",
+      "media": { "type": "person-image", "recordId": "person-albert-einstein" },
+      "options": [
+        { "id": "a", "text": "Theoretical physics" },
+        { "id": "b", "text": "Botany" },
+        { "id": "c", "text": "Architecture" },
+        { "id": "d", "text": "Linguistics" }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Einstein was a theoretical physicist known for relativity and other major contributions to physics.",
+      "sourceUrls": ["https://en.wikipedia.org/wiki/Albert_Einstein"]
+    },
+    {
+      "id": "cartoons-001",
+      "category": "cartoons",
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Which network originally aired Scooby-Doo, Where Are You!?",
+      "media": { "type": "cartoon-poster", "recordId": "cartoon-scooby-doo-where-are-you" },
+      "options": [
+        { "id": "a", "text": "CBS" },
+        { "id": "b", "text": "Nickelodeon" },
+        { "id": "c", "text": "Disney Channel" },
+        { "id": "d", "text": "Cartoon Network" }
+      ],
+      "correctOptionId": "a",
+      "explanation": "The original series premiered on CBS in 1969.",
+      "sourceUrls": ["https://en.wikipedia.org/wiki/Scooby-Doo,_Where_Are_You!"]
+    },
+    {
+      "id": "countries-001",
+      "category": "countries",
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "What is the capital of Bahrain?",
+      "media": null,
+      "options": [
+        { "id": "a", "text": "Manama" },
+        { "id": "b", "text": "Muharraq" },
+        { "id": "c", "text": "Riffa" },
+        { "id": "d", "text": "Hamad Town" }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Manama is the capital of Bahrain.",
+      "sourceUrls": ["https://restcountries.com/"]
+    },
+    {
+      "id": "history-001",
+      "category": "history",
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Which came first?",
+      "media": null,
+      "options": [
+        { "id": "a", "text": "The telegraph" },
+        { "id": "b", "text": "The smartphone" },
+        { "id": "c", "text": "The touchscreen smartphone" },
+        { "id": "d", "text": "The mobile app store" }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Electrical telegraphy was developed in the 19th century, long before smartphones.",
+      "sourceUrls": ["https://en.wikipedia.org/wiki/Telegraphy"]
+    },
+    {
+      "id": "history-002",
+      "category": "history",
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "Who won the Battle of Waterloo in 1815?",
+      "media": null,
+      "options": [
+        { "id": "a", "text": "The Seventh Coalition" },
+        { "id": "b", "text": "Napoleon's French Empire" },
+        { "id": "c", "text": "The Roman Empire" },
+        { "id": "d", "text": "The Ottoman Empire" }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Coalition forces led by Wellington and Blücher defeated Napoleon's army.",
+      "sourceUrls": ["https://en.wikipedia.org/wiki/Battle_of_Waterloo"]
+    },
+    {
+      "id": "coding-001",
+      "category": "coding",
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Which HTML element creates a hyperlink?",
+      "media": null,
+      "options": [
+        { "id": "a", "text": "<a>" },
+        { "id": "b", "text": "<p>" },
+        { "id": "c", "text": "<img>" },
+        { "id": "d", "text": "<link>" }
+      ],
+      "correctOptionId": "a",
+      "explanation": "The anchor element <a> creates a hyperlink when it has an href attribute.",
+      "sourceUrls": ["https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a"]
+    },
+    {
+      "id": "coding-002",
+      "category": "coding",
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Which CSS property changes the text color?",
+      "media": null,
+      "options": [
+        { "id": "a", "text": "color" },
+        { "id": "b", "text": "font-style" },
+        { "id": "c", "text": "background-image" },
+        { "id": "d", "text": "text-align" }
+      ],
+      "correctOptionId": "a",
+      "explanation": "The CSS color property sets an element's foreground text color.",
+      "sourceUrls": ["https://developer.mozilla.org/en-US/docs/Web/CSS/color"]
+    },
+    {
+      "id": "coding-003",
+      "category": "coding",
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "What does this JavaScript expression return? 5 === '5'",
+      "media": null,
+      "options": [
+        { "id": "a", "text": "true" },
+        { "id": "b", "text": "false" },
+        { "id": "c", "text": "undefined" },
+        { "id": "d", "text": "It throws an error" }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Strict equality compares value and type, so the number 5 is not strictly equal to the string '5'.",
+      "sourceUrls": ["https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality"]
+    },
+    {
+      "id": "coding-004",
+      "category": "coding",
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Which HTML attribute specifies an image's file URL?",
+      "media": null,
+      "options": [
+        { "id": "a", "text": "src" },
+        { "id": "b", "text": "href" },
+        { "id": "c", "text": "alt" },
+        { "id": "d", "text": "target" }
+      ],
+      "correctOptionId": "a",
+      "explanation": "The src attribute provides the URL of the image resource; alt provides alternative text.",
+      "sourceUrls": ["https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img"]
+    },
+    {
+      "id": "coding-005",
+      "category": "coding",
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "Which event fires when a user clicks an element?",
+      "media": null,
+      "options": [
+        { "id": "a", "text": "click" },
+        { "id": "b", "text": "changeColor" },
+        { "id": "c", "text": "hovered" },
+        { "id": "d", "text": "press" }
+      ],
+      "correctOptionId": "a",
+      "explanation": "The click event fires when an element is activated by a pointer click or an equivalent user action.",
+      "sourceUrls": ["https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event"]
+    }
+  ],
+  "apiSources": {
+    "peopleMetadata": {
+      "provider": "Wikipedia REST API",
+      "exampleUrl": "https://en.wikipedia.org/api/rest_v1/page/summary/Albert_Einstein",
+      "notes": "Use the summary endpoint for a concise description and a thumbnail when available. Verify individual facts before generating scored questions."
+    },
+    "structuredFacts": {
+      "provider": "Wikidata Query Service",
+      "url": "https://query.wikidata.org/sparql",
+      "notes": "Useful for structured dates, occupations and relationships. Cache results; avoid querying it for every question."
+    },
+    "cartoonMetadata": {
+      "provider": "TMDB",
+      "url": "https://developer.themoviedb.org/docs",
+      "notes": "Requires an API key and attribution. Keep the key off a public frontend by using a small backend/serverless proxy, or manually export permitted data."
+    },
+    "countryData": {
+      "provider": "REST Countries",
+      "url": "https://restcountries.com/",
+      "notes": "Confirm the current endpoint/authentication and terms before implementation."
+    },
+    "countryShapes": {
+      "provider": "World Atlas / Natural Earth",
+      "url": "https://github.com/topojson/world-atlas",
+      "notes": "Use country polygon data to render selectable silhouettes. Match countries carefully, because names and disputed boundaries can vary between datasets."
+    },
+    "historicalImages": {
+      "provider": "Library of Congress API",
+      "url": "https://www.loc.gov/apis/json-and-yaml/",
+      "exampleSearchUrl": "https://www.loc.gov/photos/?q=rotary%20telephone&fo=json",
+      "notes": "Check rights and item-level metadata before redistributing or embedding an image."
+    },
+    "codingReference": {
+      "provider": "MDN Web Docs",
+      "url": "https://developer.mozilla.org/",
+      "notes": "Use for fact-checking HTML, CSS and JavaScript answers. Keep questions in the local bank so difficulty and distractors remain consistent."
+    }
+  }
+}

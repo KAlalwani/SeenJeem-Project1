@@ -8,7 +8,7 @@ const page = window.location.pathname.split("/").pop() || "index.html";
 // ===== Page-local variables (only needed on one page) =====
 let selectedCount = 0; // index.html only
 let lifeline = 0; // team.html only
-
+let quizData; // question.html only
 // ===== Storage helpers =====
 // JSON keeps types (numbers, booleans, arrays), so no "false" string bugs.
 function getJSON(key, fallback = null) {
@@ -43,9 +43,10 @@ const QElement = document.querySelectorAll("td");
 const gameRoundsElement = document.querySelector("#game-rounds");
 const timeBarElement = document.querySelector(".timer-bar");
 const teamPointsElement = document.querySelectorAll(".team-points");
-const QChoiceElement = document.querySelectorAll('.choice')
-const gameNameElement = document.querySelectorAll('.team > span')
-const gameCategoryElement =document.querySelectorAll('.game-category')
+const questionElement = document.querySelector("#side-Q > h1");
+const QChoiceElement = document.querySelectorAll(".choice");
+const gameNameElement = document.querySelectorAll(".team > span");
+const gameCategoryElement = document.querySelectorAll(".game-category");
 
 // ===== Listeners =====
 startBtnElement.forEach((button) => {
@@ -69,8 +70,8 @@ if (pointsCheckBoxElement) {
   pointsCheckBoxElement.addEventListener("change", checkGameSettings);
 }
 QChoiceElement.forEach((choice) => {
-  choice.addEventListener('click', selectChoice)
-})
+  choice.addEventListener("click", selectChoice);
+});
 
 // ===== Functions =====
 function selectCategory(event) {
@@ -129,15 +130,13 @@ function selectQ(event) {
   window.location.href = "./question.html";
 }
 
-function selectChoice(){
+function selectChoice() {}
 
-}
-
-function displayGame(){
-  gameNameElement.item(1).innerText = getJSON('teamNames')[0]
-  gameNameElement.item(3).innerText = getJSON('teamNames')[1]
- for (let i = 0; i < getJSON("categories").length; i++) {
-      gameCategoryElement.item(i).innerText = getJSON('categories')[i]
+function displayGame() {
+  gameNameElement.item(1).innerText = getJSON("teamNames")[0];
+  gameNameElement.item(3).innerText = getJSON("teamNames")[1];
+  for (let i = 0; i < getJSON("categories").length; i++) {
+    gameCategoryElement.item(i).innerText = getJSON("categories")[i];
   }
 }
 
@@ -159,10 +158,21 @@ function checkGameSettings() {
 }
 
 function question() {
-  let questionObject = sessionStorage.getItem("questionText");
   timer();
+  let questionObject = sessionStorage.getItem("questionText");
   console.log(questionObject);
-  console.log(getJSON("team1", true));
+  console.log(getJSON("team1", true));
+  const questionData = getRandomQuestion("people");
+
+  if (!questionData) return;
+  questionElement.innerHTML = questionData.prompt
+  QChoiceElement.forEach((choice, index) => {
+    choice.textContent = questionData.options[index]?.text ?? "";
+  });
+
+  console.log(questionData.prompt);
+  console.log(questionData.options);
+  console.log(questionData.correctOptionId);
 }
 
 // function displayScore(event){
@@ -201,6 +211,31 @@ function timer() {
       alert("Time's up!");
     }
   }, 1000);
+}
+
+async function loadQuizData() {
+  const response = await fetch("./data/quiz_bank_starter.json");
+
+  if (!response.ok) {
+    throw new Error("Failed to load quiz bank");
+  }
+
+  quizData = await response.json();
+}
+
+function getRandomQuestion(category) {
+  const questions = quizData.questionBank.filter(
+    (question) => question.category === category,
+  );
+
+  if (questions.length === 0) {
+    console.error(`No questions found for ${category}`);
+    return null;
+  }
+
+  const randomIndex = Math.floor(Math.random() * questions.length);
+
+  return questions[randomIndex];
 }
 
 function nextPage() {
@@ -280,10 +315,12 @@ function nextPage() {
 
 // ===== Run on page load =====
 if (page === "game.html") {
-  roundDisplay(); 
-  restoreCells(); 
+  roundDisplay();
+  restoreCells();
   displayGame();
 }
 if (page === "question.html") {
-  question();
+  loadQuizData()
+    .then(() => question())
+    .catch((error) => console.error(error));
 }
