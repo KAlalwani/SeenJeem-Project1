@@ -43,6 +43,9 @@ const QElement = document.querySelectorAll("td");
 const gameRoundsElement = document.querySelector("#game-rounds");
 const timeBarElement = document.querySelector(".timer-bar");
 const teamPointsElement = document.querySelectorAll(".team-points");
+const QChoiceElement = document.querySelectorAll('.choice')
+const gameNameElement = document.querySelectorAll('.team > span')
+const gameCategoryElement =document.querySelectorAll('.game-category')
 
 // ===== Listeners =====
 startBtnElement.forEach((button) => {
@@ -65,6 +68,9 @@ if (roundsCheckBoxElement) {
 if (pointsCheckBoxElement) {
   pointsCheckBoxElement.addEventListener("change", checkGameSettings);
 }
+QChoiceElement.forEach((choice) => {
+  choice.addEventListener('click', selectChoice)
+})
 
 // ===== Functions =====
 function selectCategory(event) {
@@ -121,6 +127,18 @@ function selectQ(event) {
 
   sessionStorage.setItem("questionText", cell.innerHTML);
   window.location.href = "./question.html";
+}
+
+function selectChoice(){
+
+}
+
+function displayGame(){
+  gameNameElement.item(1).innerText = getJSON('teamNames')[0]
+  gameNameElement.item(3).innerText = getJSON('teamNames')[1]
+ for (let i = 0; i < getJSON("categories").length; i++) {
+      gameCategoryElement.item(i).innerText = getJSON('categories')[i]
+  }
 }
 
 function roundDisplay() {
@@ -264,6 +282,7 @@ function nextPage() {
 if (page === "game.html") {
   roundDisplay(); 
   restoreCells(); 
+  displayGame();
 }
 if (page === "question.html") {
   question();

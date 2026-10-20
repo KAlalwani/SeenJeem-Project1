@@ -11,19 +11,24 @@ body {
     height: 100dvh;
 }
 
-main {
+
+.main-index {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content:center;
+
     gap: 16px;
     width: 100%;
+    height: 100%;
 }
-
 #horizantal-container {
     display: flex;
-    margin: 32px;
     width: 100%;
     gap: 8px;
+    padding: 1rem;
+    justify-content:center;
+    box-sizing: border-box;
+
 }
 #search {
     flex-grow: 1;
@@ -45,6 +50,15 @@ main {
 }
 
 /* team page */
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    height: 100%;
+}
 .teams-container {
     display: flex;
     gap: 32px;
@@ -53,24 +67,39 @@ main {
     display: flex;
     gap: 32px;
 }
+.lifelines-container.team{
+    display: flex;
+    justify-content: space-between;
+}
 .lifeline {
     background-color: violet;
 }
-
+#game-settings {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+}
 /* game */
 .body {
     display: flex;
     flex-direction: column;
 }
+
 .main {
     display: flex;
-    width: 100%;
     justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    height: 100%;
 }
 .team-side {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    height:100%;
+    width:6rem;
     align-items: center;
     background-color: aqua;
 }
@@ -157,7 +186,7 @@ td {
     padding: 0px;
     overflow-y: auto;
 }
-#lifelines-container {
+.lifelines-container .Q {
     display: flex;
     flex-direction: column;
 }
@@ -165,9 +194,21 @@ td {
     display: flex;
     flex-direction: column;
     gap: 32px;
-    width: 100%;  
+    width: 90%;  
     align-items: center;
     padding: 32px 0;
+    margin: 0 16px;
+    box-sizing: border-box;
+      
+
+}
+.choice{
+    background-color: blanchedalmond;
+    width: 100%;
+    text-align: center;
+    padding: 8px;
+    box-sizing: border-box;
+
 }
  #side-Q > h1{
     padding: 16px 0;
