@@ -349,7 +349,7 @@ function nextPage() {
       maxRounds = Number(roundsAmountElement.value);
     }
 
-    let points = 7500;
+    let points = 2700;
     if (pointsCheckBoxElement.checked) {
       if (pointsAmountElement.value < 100 || pointsAmountElement.value > 7500) {
         alert("Points must be between 100 and 7500.");
