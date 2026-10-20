@@ -280,6 +280,15 @@ main > .hero-section {
   border-radius: 1rem;
 }
 
+.lifeline-team-label {
+  margin-top: 0.25rem;
+  color: var(--sj-indigo);
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .lifeline {
   display: grid;
   flex: 1 1 0;
