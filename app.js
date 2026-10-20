@@ -4,7 +4,7 @@ selectedCount = 0;
 selectedCategories = 5;
 MaxRounds = selectedCategories * 5;
 points = null;
-rounds = 1
+rounds = 1;
 lifeline = 0;
 team1 = true;
 
@@ -16,11 +16,10 @@ const pointsCheckBoxElement = document.querySelector("#points");
 const roundsAmountElement = document.querySelector("#rounds-amount");
 const pointsAmountElement = document.querySelector("#points-amount");
 const lifelineElement = document.querySelectorAll(".lifeline");
-const QElement = document.querySelectorAll('td')
-const gameRoundsElement = document.querySelector('#game-rounds')
-const timeBarElement = document.querySelector('.timer-bar');
-
-
+const QElement = document.querySelectorAll("td");
+const gameRoundsElement = document.querySelector("#game-rounds");
+const timeBarElement = document.querySelector(".timer-bar");
+const teamPointsElement = document.querySelectorAll('.team-points')
 
 startBtnElement.forEach((button) => {
   button.addEventListener("click", nextPage);
@@ -77,25 +76,23 @@ function selectQ(event) {
   let color = getComputedStyle(event.currentTarget).backgroundColor;
   console.log(color);
   if (color === unSelectedColor) {
-    if(team1)
-    {event.currentTarget.style.backgroundColor = "green";
-    team1 = false
-    console.log(rounds);
-    window.location.href = './question.html'
+    if (team1) {
+      event.currentTarget.style.backgroundColor = "green";
+      team1 = false;
+      console.log(rounds);
+      question(event)
+    } else {
+      event.currentTarget.style.backgroundColor = "yellow";
+      team1 = true;
+      question(event)
 
+      rounds++;
+      roundDisplay();
+      console.log("rounds:" + rounds);
+    }
   }
-    else {
-    event.currentTarget.style.backgroundColor = "yellow";
-    team1 = true;
-      window.location.href = './question.html'
-
-    rounds++;
-    roundDisplay()
-    console.log("rounds:" + rounds);
-  }
-  } 
 }
-function roundDisplay(){
+function roundDisplay() {
   gameRoundsElement.innerHTML = rounds;
 }
 function checkGameSettings() {
@@ -108,84 +105,96 @@ function checkGameSettings() {
   if (roundsCheckBoxElement.checked) roundsAmountElement.disabled = false;
   else if (!roundsCheckBoxElement.checked) roundsAmountElement.disabled = true;
 }
-function question(event){
-  console.log(event.target)
-
-
-
+function question(event) {
+  window.location.href = "./question.html";
+  timer()
+  console.log(event.target);
 
 }
-  if(window.location.pathname.includes('question.html')){
-    let timeLeft = 20;
-const totalTime = 20;
-    const timer = setInterval(() => {
-  timeLeft--;
+// function displayScore(event){
+//   teamPointsElement.item(0).innerHTML = '100$'
+//   if (window.location.pathname.includes("game.html")) {
+//   let scoreLeft = 20;
+//   const totalScore = 20;
+//   const score = setInterval(() => {
+//     scoreLeft--;
 
-  timeBarElement.style.width = `${(timeLeft / totalTime) * 100}%`;
+//     scoreBarElement.style.height = `${(scoreLeft / totalScore) * 100}%`;
 
-  if (timeLeft <= 5) {
-    timeBarElement.style.backgroundColor = "red";
-  }
+//     if (scoreLeft <= 0) {
+//       clearInterval(score);
+//       alert("Score's up!");
+//     }
+//   }, 1000);
+// }
+// }
+function timer(){
+if (window.location.pathname.includes("question.html")) {
+  let timeLeft = 20;
+  const totalTime = 20;
+  const timer = setInterval(() => {
+    timeLeft--;
 
-  if (timeLeft < 0) {
-    clearInterval(timer);
-    alert("Time's up!");
-  }
-}, 1000);
+    timeBarElement.style.width = `${(timeLeft / totalTime) * 100}%`;
+
+    if (timeLeft <= 5) {
+      timeBarElement.style.backgroundColor = "red";
+    }
+
+    if (timeLeft < 0) {
+      clearInterval(timer);
+      alert("Time's up!");
+    }
+  }, 1000);
 }
-function nextPage(){
-  if(window.location.pathname.includes('index.html')){
-    if(selectedCount === 5){
+}
+
+function nextPage() {
+  if (window.location.pathname.includes("index.html")) {
+    if (selectedCount === 5) {
       selectedCount = 0;
-      window.location.href ='./team.html'
+      window.location.href = "./team.html";
     } else {
-      alert('Please selecet 5 categories.')
+      alert("Please selecet 5 categories.");
     }
-    return
+    return;
   }
-  if(window.location.pathname.includes('team.html')){
+  if (window.location.pathname.includes("team.html")) {
     if (teamNameElement.item(0).value === "") {
-    alert("Please enter the first team name.");
-    return;
-  }
-
-  if (teamNameElement.item(1).value === "") {
-    alert("Please enter the second team name.");
-    return;
-  }
-
-  checkGameSettings();
-
-  if (roundsCheckBoxElement.checked) {
-    if (
-      roundsAmountElement.value <= 0 ||
-      roundsAmountElement.value > 12
-    ) {
-      alert("Rounds must be between 1 and 12.");
+      alert("Please enter the first team name.");
       return;
     }
 
-    rounds = roundsAmountElement.value;
-  }
-
-  if (pointsCheckBoxElement.checked) {
-    if (
-      pointsAmountElement.value < 100 ||
-      pointsAmountElement.value > 7500
-    ) {
-      alert("Points must be between 100 and 7500.");
+    if (teamNameElement.item(1).value === "") {
+      alert("Please enter the second team name.");
       return;
     }
 
-    points = pointsAmountElement.value;
+    checkGameSettings();
+
+    if (roundsCheckBoxElement.checked) {
+      if (roundsAmountElement.value <= 0 || roundsAmountElement.value > 12) {
+        alert("Rounds must be between 1 and 12.");
+        return;
+      }
+
+      rounds = roundsAmountElement.value;
+    }
+
+    if (pointsCheckBoxElement.checked) {
+      if (pointsAmountElement.value < 100 || pointsAmountElement.value > 7500) {
+        alert("Points must be between 100 and 7500.");
+        return;
+      }
+
+      points = pointsAmountElement.value;
+    }
+
+    if (lifeline <= 2) {
+      alert("Please select 3+ lifelines.");
+      return;
+    }
+
+    window.location.href = "./game.html";
   }
-
-  if (lifeline <= 2) {
-    alert("Please select 3+ lifelines.");
-    return;
-  }
-
-  window.location.href = "./game.html";
 }
-}
-
