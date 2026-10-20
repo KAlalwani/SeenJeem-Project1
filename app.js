@@ -2,9 +2,10 @@
 const selectedColor = "red";
 const unSelectedColor = "rgb(238, 130, 238)";
 const selectedCategories = 5;
-const MaxRounds = selectedCategories * 5;
 const page = window.location.pathname.split("/").pop() || "index.html";
-const choice = new Array('a', 'b', 'c', 'd')
+const choice = new Array("a", "b", "c", "d");
+const totalScore = getJSON("points");
+const totalRounds = getJSON("totalRounds");
 
 // ===== Page-local variables (only needed on one page) =====
 let selectedCount = 0; // index.html only
@@ -26,6 +27,8 @@ if (page === "index.html") {
   sessionStorage.clear();
   setJSON("rounds", 1);
   setJSON("team1", true);
+  setJSON("pointsT1", 0);
+  setJSON("pointsT2", 0);
 }
 if (page === "game.html" || page === "question.html") {
   if (getJSON("team1") === null || getJSON("rounds") === null) {
@@ -50,8 +53,8 @@ const questionElement = document.querySelector("#side-Q > h1");
 const QChoiceElement = document.querySelectorAll(".choice");
 const gameNameElement = document.querySelectorAll(".team > span");
 const gameCategoryElement = document.querySelectorAll(".game-category");
-const doneBtnElement = document.querySelector('.done-btn')
-
+const doneBtnElement = document.querySelector(".done-btn");
+const scoreBarElement = document.querySelectorAll(".points-counter");
 // ===== Listeners =====
 startBtnElement.forEach((button) => {
   button.addEventListener("click", nextPage);
@@ -77,7 +80,9 @@ QChoiceElement.forEach((choice) => {
   choice.addEventListener("click", selectChoice);
 });
 if (page === "question.html")
-  doneBtnElement.addEventListener("click",() => {submitAnwser(usrAns);})
+  doneBtnElement.addEventListener("click", () => {
+    submitAnwser(usrAns);
+  });
 
 // ===== Functions =====
 function selectCategory(event) {
@@ -111,42 +116,36 @@ function selectQ(event) {
   const team1 = getJSON("team1");
   const rounds = getJSON("rounds");
 
-  if (team1 === null || rounds === null) {
-    window.location.href = "./index.html";
-    return;
-  }
-
   const cellIndex = Array.from(QElement).indexOf(cell);
   const used = getJSON("usedQuestions", []);
 
-  if (team1) {
-    cell.style.backgroundColor = "green";
-    used.push({ index: cellIndex, color: "green" });
-    setJSON("team1", false);
-  } else {
-    cell.style.backgroundColor = "yellow";
-    used.push({ index: cellIndex, color: "yellow" });
-    setJSON("team1", true);
+  setJSON("answeringTeam", team1);
+
+  cell.style.backgroundColor = team1 ? "green" : "yellow";
+  used.push({
+    index: cellIndex,
+    color: team1 ? "green" : "yellow",
+  });
+
+  setJSON("usedQuestions", used);
+  setJSON("team1", !team1);
+
+  if (!team1) {
     setJSON("rounds", rounds + 1);
   }
 
-  setJSON("usedQuestions", used);
-
   sessionStorage.setItem("questionText", cell.innerHTML);
+  setJSON("questionPoints", Number(cell.textContent.trim()));
   window.location.href = "./question.html";
 }
 
 function selectChoice(event) {
   usrAns = Array.from(QChoiceElement).indexOf(event.currentTarget);
-  console.log(usrAns)
-  for(let i = 0; i < 4; i++){
-    if(usrAns === i)
-        QChoiceElement.item(i).style.backgroundColor = 'green'
-    else
-        QChoiceElement.item(i).style.backgroundColor = 'blanchedalmond'
-
+  console.log(usrAns);
+  for (let i = 0; i < 4; i++) {
+    if (usrAns === i) QChoiceElement.item(i).style.backgroundColor = "green";
+    else QChoiceElement.item(i).style.backgroundColor = "blanchedalmond";
   }
-      
 }
 
 function displayGame() {
@@ -178,11 +177,11 @@ function question() {
   timer();
   let questionObject = sessionStorage.getItem("questionText");
   console.log(questionObject);
-  console.log(getJSON("team1", true));
+  console.log(getJSON("team1", true));
   const questionData = getRandomQuestion("people");
 
   if (!questionData) return;
-  questionElement.innerHTML = questionData.prompt
+  questionElement.innerHTML = questionData.prompt;
   QChoiceElement.forEach((choice, index) => {
     choice.textContent = questionData.options[index]?.text ?? "";
   });
@@ -192,22 +191,36 @@ function question() {
   console.log(questionData.correctOptionId);
 }
 
-// function displayScore(event){
-//   teamPointsElement.item(0).innerHTML = '100$'
+function displayScore() {
+  const pointsT1 = getJSON("pointsT1", 0);
+  const pointsT2 = getJSON("pointsT2", 0);
+  const maxScore = getJSON("points") || 1000;
+
+  teamPointsElement.item(0).textContent = pointsT1;
+  teamPointsElement.item(1).textContent = pointsT2;
+
+  scoreBarElement.forEach((bar, index) => {
+    const score = index === 0 ? pointsT1 : pointsT2;
+    bar.style.height = `${Math.min((score / maxScore) * 100, 100)}%`;
+  });
+}
+// function displayScore() {
+//   let questionValue = Number(sessionStorage.getItem("questionText"));
+//   let scoreLeft;
 //   if (window.location.pathname.includes("game.html")) {
-//   let scoreLeft = 20;
-//   const totalScore = 20;
-//   const score = setInterval(() => {
-//     scoreLeft--;
-
-//     scoreBarElement.style.height = `${(scoreLeft / totalScore) * 100}%`;
-
-//     if (scoreLeft <= 0) {
-//       clearInterval(score);
+//     if (getJSON("team1")) {
+//       setJSON("pointsT1", getJSON("pointsT1") + questionValue);
+//       scoreLeft = totalScore - getJSON("pointsT1");
+//       scoreBarElement.item(0).style.height = `${(scoreLeft / totalScore) * 100}%`;
+//     } else {
+//       setJSON("pointsT2", getJSON("pointsT2") + questionValue);
+//       scoreLeft = totalScore - getJSON("pointsT2");
+//       scoreBarElement.item(1).style.height = `${(scoreLeft / totalScore) * 100}%`;
+//     }
+//     if (scoreLeft >= totalScore) {
 //       alert("Score's up!");
 //     }
-//   }, 1000);
-// }
+//   }
 // }
 
 function timer() {
@@ -226,7 +239,7 @@ function timer() {
     if (timeLeft < 0) {
       clearInterval(timerId);
       alert("Time's up!");
-      submitAnwser(usrAns)
+      submitAnwser(usrAns);
     }
   }, 1000);
 }
@@ -256,12 +269,27 @@ function getRandomQuestion(category) {
   return questions[randomIndex];
 }
 
-function submitAnwser(usrAns){
-  console.log(choice[usrAns])
-  if(realAns == choice[usrAns])
-    alert('winner!')
-  else alert('loser!')
-  window.location.href ='./game.html'
+function submitAnwser(usrAns) {
+  if (usrAns === undefined || usrAns === null) {
+    alert("Please select an answer first.");
+    return;
+  }
+
+  if (realAns === choice[usrAns]) {
+    const answeringTeam = getJSON("answeringTeam");
+    const key = answeringTeam ? "pointsT1" : "pointsT2";
+
+    const currentPoints = getJSON(key, 0);
+    const questionPoints = getJSON("questionPoints", 0);
+
+    setJSON(key, currentPoints + questionPoints);
+
+    alert(`Correct! +${questionPoints} points`);
+  } else {
+    alert("Incorrect!");
+  }
+
+  window.location.href = "./game.html";
 }
 
 function nextPage() {
@@ -293,7 +321,7 @@ function nextPage() {
 
     checkGameSettings();
 
-    let maxRounds = MaxRounds;
+    let maxRounds = selectedCategories * 5;
     if (roundsCheckBoxElement.checked) {
       if (roundsAmountElement.value <= 0 || roundsAmountElement.value > 12) {
         alert("Rounds must be between 1 and 12.");
@@ -302,7 +330,7 @@ function nextPage() {
       maxRounds = Number(roundsAmountElement.value);
     }
 
-    let points = null;
+    let points = 7500;
     if (pointsCheckBoxElement.checked) {
       if (pointsAmountElement.value < 100 || pointsAmountElement.value > 7500) {
         alert("Points must be between 100 and 7500.");
@@ -321,7 +349,7 @@ function nextPage() {
       teamNameElement.item(0).value,
       teamNameElement.item(1).value,
     ]);
-    setJSON("maxRounds", maxRounds);
+    setJSON("totalRounds", maxRounds);
     setJSON("points", points);
     setJSON(
       "lifelines",
@@ -344,6 +372,7 @@ if (page === "game.html") {
   roundDisplay();
   restoreCells();
   displayGame();
+  displayScore();
 }
 if (page === "question.html") {
   loadQuizData()
