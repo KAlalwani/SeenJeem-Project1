@@ -1,9 +1,24 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    height: 100dvh;
+}
 
 main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 16px;
+    width: 100%;
 }
+
 #horizantal-container {
     display: flex;
     margin: 32px;
@@ -17,12 +32,11 @@ main {
     width: 100%;
     display: flex;
     gap: 16px;
-    align-content: center;
     align-items: center;
     justify-content: center;
 }
 .DIY-category {
- align-self: last baseline;
+    align-self: last baseline;
 }
 .category {
     background-color: violet;
@@ -31,28 +45,18 @@ main {
 }
 
 /* team page */
-main {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
 .teams-container {
-    display: flex;
-    gap:32px;
-    
-}
-#roundsAndPoints{
     display: flex;
     gap: 32px;
 }
-#lifelines-container {
+#roundsAndPoints {
     display: flex;
-    justify-content: space-between;
+    gap: 32px;
 }
-
 .lifeline {
     background-color: violet;
 }
+
 /* game */
 .body {
     display: flex;
@@ -63,14 +67,6 @@ main {
     width: 100%;
     justify-content: space-between;
 }
-.timer-container {
-    display: flex;
-    width: 100%;
-    justify-content: end;
-    margin-bottom: 8px;
-
-}
-
 .team-side {
     display: flex;
     flex-direction: column;
@@ -81,30 +77,98 @@ main {
 h1 {
     text-align: center;
 }
-
 th, td {
-  padding: 16px;
-  text-align: center;
+    padding: 16px;
+    text-align: center;
 }
 td {
     background-color: violet;
 }
 
 /* Question */
-.timer{
-  width: 100%;
-  height: 20px;
-  background-color: lightgray;
-  overflow: hidden;
+.timer-container {
+    display: flex;
+    flex: 0 0 auto;
+    width: 100%;
+    justify-content: end;
+    margin: 0;
+}
+.timer {
+    flex: 1;
+    height: 20px;
+    background-color: lightgray;
+    overflow: hidden;
 }
 .timer-bar {
-  width: 100%;
-  height: 100%;
-  background-color: green;
-  transition: width 1s linear;
+    width: 100%;
+    height: 100%;
+    background-color: green;
+    transition: width 1s linear;
 }
-.action-btns{
-    width:fit-content;
+.action-btns {
     display: flex;
-
+    width: fit-content;
 }
+
+.question {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+}
+.question > div {
+    padding: 0;                 /* now actually applies */
+    margin-left: auto;          /* pushes it to the right edge */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    /* vertical centering */
+    align-items: center;
+}
+
+#side-Q-img{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    /* vertical centering */
+    align-items: center;  
+}
+#side-Q {
+        flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;    /* vertical centering */
+    align-items: center; 
+}
+#side-Q-img {
+    min-height: 0;
+    overflow: hidden;
+}
+#side-Q-img img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.side-bar {
+    flex: 0 0 auto;
+    min-height: 0;
+    padding: 0px;
+    overflow-y: auto;
+}
+#lifelines-container {
+    display: flex;
+    flex-direction: column;
+}
+#choices-container{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;  
+    align-items: center;
+    padding: 32px 0;
+}
+ #side-Q > h1{
+    padding: 16px 0;
+ }
