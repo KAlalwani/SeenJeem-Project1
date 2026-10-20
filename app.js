@@ -9,7 +9,6 @@ const totalRounds = getJSON("totalRounds");
 
 // ===== Page-local variables (only needed on one page) =====
 let selectedCount = 0; // index.html only
-let lifeline = 0; // team.html only
 let quizData; // question.html only
 let realAns; // question.html only
 let usrAns; // question.html only
@@ -44,7 +43,15 @@ const roundsCheckBoxElement = document.querySelector("#rounds");
 const pointsCheckBoxElement = document.querySelector("#points");
 const roundsAmountElement = document.querySelector("#rounds-amount");
 const pointsAmountElement = document.querySelector("#points-amount");
-const lifelineElement = document.querySelectorAll(".lifeline");
+const setupLifelineContainerElements = document.querySelectorAll(
+  ".lifelines-container.team",
+);
+const setupLifelineElements = document.querySelectorAll(
+  ".lifelines-container.team .lifeline",
+);
+const questionLifelineElements = document.querySelectorAll(
+  ".lifelines-container.Q .lifeline",
+);
 const QElement = document.querySelectorAll("td");
 const gameRoundsElement = document.querySelector("#game-rounds");
 const gameTotalRoundsElement = document.querySelector("#game-total-rounds");
@@ -63,7 +70,7 @@ startBtnElement.forEach((button) => {
 categoryElement.forEach((category) => {
   category.addEventListener("click", selectCategory);
 });
-lifelineElement.forEach((item) => {
+setupLifelineElements.forEach((item) => {
   item.addEventListener("click", selectLifeline);
 });
 if (page === "game.html") {
@@ -100,16 +107,9 @@ function selectCategory(event) {
 }
 
 function selectLifeline(event) {
-  console.log("select lifeline");
-  let color = getComputedStyle(event.currentTarget).backgroundColor;
-  if (color === unSelectedColor) {
-    event.currentTarget.style.backgroundColor = "red";
-    lifeline++;
-  } else {
-    event.currentTarget.style.backgroundColor = "violet";
-    lifeline--;
-  }
-  console.log("lifelines:" + lifeline);
+  const lifeline = event.currentTarget;
+  const isSelected = lifeline.classList.toggle("is-selected");
+  lifeline.style.backgroundColor = isSelected ? selectedColor : "violet";
 }
 
 function selectQ(event) {
@@ -198,6 +198,7 @@ function checkGameSettings() {
 }
 
 function question() {
+  displayQuestionLifelines();
   timer();
   const { category, pointValue } = getJSON("questionCriteria", {});
   const questionData = getRandomQuestion(category, pointValue);
@@ -214,6 +215,22 @@ function question() {
   console.log(questionData.prompt);
   console.log(questionData.options);
   console.log(questionData.correctOptionId);
+}
+
+function displayQuestionLifelines() {
+  if (questionLifelineElements.length === 0) return;
+
+  const lifelinesByTeam = getJSON("lifelines", { team1: [], team2: [] });
+  const teamKey = getJSON("answeringTeam") ? "team1" : "team2";
+  const teamLifelines = lifelinesByTeam[teamKey] || [];
+
+  questionLifelineElements.forEach((element, index) => {
+    const label = teamLifelines[index];
+    element.hidden = !label;
+    if (label) {
+      element.querySelector("figcaption").textContent = label;
+    }
+  });
 }
 
 function displayScore() {
@@ -365,8 +382,15 @@ function nextPage() {
       points = Number(pointsAmountElement.value);
     }
 
-    if (lifeline <= 2) {
-      alert("Please select 3+ lifelines.");
+    const lifelinesByTeam = Array.from(setupLifelineContainerElements).map(
+      (container) =>
+        Array.from(container.querySelectorAll(".lifeline"))
+          .filter((lifeline) => lifeline.classList.contains("is-selected"))
+          .map((lifeline) => lifeline.innerText.trim()),
+    );
+
+    if (lifelinesByTeam.some((teamLifelines) => teamLifelines.length < 3)) {
+      alert("Please select 3+ lifelines for each team.");
       return;
     }
 
@@ -377,12 +401,10 @@ function nextPage() {
     ]);
     setJSON("totalRounds", maxRounds);
     setJSON("points", points);
-    setJSON(
-      "lifelines",
-      Array.from(lifelineElement)
-        .filter((el) => el.style.backgroundColor === selectedColor)
-        .map((el) => el.innerText),
-    );
+    setJSON("lifelines", {
+      team1: lifelinesByTeam[0],
+      team2: lifelinesByTeam[1],
+    });
 
     window.location.href = "./game.html";
     return;
