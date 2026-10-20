@@ -1,13 +1,36 @@
-selectedColor = "red";
-unSelectedColor = "rgb(238, 130, 238)";
-selectedCount = 0;
-selectedCategories = 5;
-MaxRounds = selectedCategories * 5;
-points = null;
-rounds = 1;
-lifeline = 0;
-team1 = true;
+// ===== Constants =====
+const selectedColor = "red";
+const unSelectedColor = "rgb(238, 130, 238)";
+const selectedCategories = 5;
+const MaxRounds = selectedCategories * 5;
+const page = window.location.pathname.split("/").pop() || "index.html";
 
+// ===== Page-local variables (only needed on one page) =====
+let selectedCount = 0; // index.html only
+let lifeline = 0; // team.html only
+
+// ===== Storage helpers =====
+// JSON keeps types (numbers, booleans, arrays), so no "false" string bugs.
+function getJSON(key, fallback = null) {
+  const value = sessionStorage.getItem(key);
+  return value === null ? fallback : JSON.parse(value);
+}
+function setJSON(key, value) {
+  sessionStorage.setItem(key, JSON.stringify(value));
+}
+
+if (page === "index.html") {
+  sessionStorage.clear();
+  setJSON("rounds", 1);
+  setJSON("team1", true);
+}
+if (page === "game.html" || page === "question.html") {
+  if (getJSON("team1") === null || getJSON("rounds") === null) {
+    window.location.href = "./index.html"; // state lost, restart
+  }
+}
+
+// ===== Elements =====
 const startBtnElement = document.querySelectorAll(".start-btn");
 const categoryElement = document.querySelectorAll(".category");
 const teamNameElement = document.querySelectorAll(".team-names");
@@ -19,98 +42,111 @@ const lifelineElement = document.querySelectorAll(".lifeline");
 const QElement = document.querySelectorAll("td");
 const gameRoundsElement = document.querySelector("#game-rounds");
 const timeBarElement = document.querySelector(".timer-bar");
-const teamPointsElement = document.querySelectorAll('.team-points')
+const teamPointsElement = document.querySelectorAll(".team-points");
 
+// ===== Listeners =====
 startBtnElement.forEach((button) => {
   button.addEventListener("click", nextPage);
 });
 categoryElement.forEach((category) => {
   category.addEventListener("click", selectCategory);
 });
-lifelineElement.forEach((lifeline) => {
-  lifeline.addEventListener("click", selectLifeline);
+lifelineElement.forEach((item) => {
+  item.addEventListener("click", selectLifeline);
 });
-QElement.forEach((Q) => {
-  Q.addEventListener("click", selectQ);
-});
+if (page === "game.html") {
+  QElement.forEach((Q) => {
+    Q.addEventListener("click", selectQ);
+  });
+}
 if (roundsCheckBoxElement) {
   roundsCheckBoxElement.addEventListener("change", checkGameSettings);
 }
-
 if (pointsCheckBoxElement) {
   pointsCheckBoxElement.addEventListener("change", checkGameSettings);
 }
 
+// ===== Functions =====
 function selectCategory(event) {
-  console.log("slecet category");
+  console.log("select category");
   let color = getComputedStyle(event.currentTarget).backgroundColor;
-  console.log(color);
   if (color === unSelectedColor) {
     event.currentTarget.style.backgroundColor = "red";
     selectedCount++;
-    console.log(selectedCount);
   } else {
     event.currentTarget.style.backgroundColor = "violet";
-    color = false;
     selectedCount--;
-    console.log(selectedCount);
   }
+  console.log(selectedCount);
 }
+
 function selectLifeline(event) {
-  console.log("slecet lifeline");
+  console.log("select lifeline");
   let color = getComputedStyle(event.currentTarget).backgroundColor;
-  console.log(color);
   if (color === unSelectedColor) {
     event.currentTarget.style.backgroundColor = "red";
     lifeline++;
-    console.log(lifeline);
   } else {
     event.currentTarget.style.backgroundColor = "violet";
-    color = false;
     lifeline--;
-    console.log("lifelines:" + lifeline);
   }
+  console.log("lifelines:" + lifeline);
 }
+
 function selectQ(event) {
-  console.log("slecet Q");
-  let color = getComputedStyle(event.currentTarget).backgroundColor;
-  console.log(color);
-  if (color === unSelectedColor) {
-    if (team1) {
-      event.currentTarget.style.backgroundColor = "green";
-      team1 = false;
-      console.log(rounds);
-      question(event)
-    } else {
-      event.currentTarget.style.backgroundColor = "yellow";
-      team1 = true;
-      question(event)
+  const cell = event.currentTarget;
+  const team1 = getJSON("team1");
+  const rounds = getJSON("rounds");
 
-      rounds++;
-      roundDisplay();
-      console.log("rounds:" + rounds);
-    }
+  if (team1 === null || rounds === null) {
+    window.location.href = "./index.html";
+    return;
+  }
+
+  const cellIndex = Array.from(QElement).indexOf(cell);
+  const used = getJSON("usedQuestions", []);
+
+  if (team1) {
+    cell.style.backgroundColor = "green";
+    used.push({ index: cellIndex, color: "green" });
+    setJSON("team1", false);
+  } else {
+    cell.style.backgroundColor = "yellow";
+    used.push({ index: cellIndex, color: "yellow" });
+    setJSON("team1", true);
+    setJSON("rounds", rounds + 1);
+  }
+
+  setJSON("usedQuestions", used);
+
+  sessionStorage.setItem("questionText", cell.innerHTML);
+  window.location.href = "./question.html";
+}
+
+function roundDisplay() {
+  if (gameRoundsElement) {
+    gameRoundsElement.innerHTML = getJSON("rounds", 1);
   }
 }
-function roundDisplay() {
-  gameRoundsElement.innerHTML = rounds;
-}
-function checkGameSettings() {
-  console.log("settings");
-  if (pointsCheckBoxElement.checked) {
-    console.log("point");
-    pointsAmountElement.disabled = false;
-  } else if (!pointsCheckBoxElement.checked)
-    pointsAmountElement.disabled = true;
-  if (roundsCheckBoxElement.checked) roundsAmountElement.disabled = false;
-  else if (!roundsCheckBoxElement.checked) roundsAmountElement.disabled = true;
-}
-function question(event) {
-  window.location.href = "./question.html";
-  timer()
-  console.log(event.target);
 
+function restoreCells() {
+  getJSON("usedQuestions", []).forEach(({ index, color }) => {
+    if (QElement[index]) QElement[index].style.backgroundColor = color;
+  });
 }
+
+function checkGameSettings() {
+  pointsAmountElement.disabled = !pointsCheckBoxElement.checked;
+  roundsAmountElement.disabled = !roundsCheckBoxElement.checked;
+}
+
+function question() {
+  let questionObject = sessionStorage.getItem("questionText");
+  timer();
+  console.log(questionObject);
+  console.log(getJSON("team1", true));
+}
+
 // function displayScore(event){
 //   teamPointsElement.item(0).innerHTML = '100$'
 //   if (window.location.pathname.includes("game.html")) {
@@ -128,11 +164,12 @@ function question(event) {
 //   }, 1000);
 // }
 // }
-function timer(){
-if (window.location.pathname.includes("question.html")) {
+
+function timer() {
+  if (!timeBarElement) return;
   let timeLeft = 20;
   const totalTime = 20;
-  const timer = setInterval(() => {
+  const timerId = setInterval(() => {
     timeLeft--;
 
     timeBarElement.style.width = `${(timeLeft / totalTime) * 100}%`;
@@ -142,24 +179,29 @@ if (window.location.pathname.includes("question.html")) {
     }
 
     if (timeLeft < 0) {
-      clearInterval(timer);
+      clearInterval(timerId);
       alert("Time's up!");
     }
   }, 1000);
 }
-}
 
 function nextPage() {
-  if (window.location.pathname.includes("index.html")) {
+  if (page === "index.html") {
     if (selectedCount === 5) {
+      const names = Array.from(categoryElement)
+        .filter((el) => el.style.backgroundColor === selectedColor)
+        .map((el) => el.innerText);
+      setJSON("categories", names);
+
       selectedCount = 0;
       window.location.href = "./team.html";
     } else {
-      alert("Please selecet 5 categories.");
+      alert("Please select 5 categories.");
     }
     return;
   }
-  if (window.location.pathname.includes("team.html")) {
+
+  if (page === "team.html") {
     if (teamNameElement.item(0).value === "") {
       alert("Please enter the first team name.");
       return;
@@ -172,22 +214,22 @@ function nextPage() {
 
     checkGameSettings();
 
+    let maxRounds = MaxRounds;
     if (roundsCheckBoxElement.checked) {
       if (roundsAmountElement.value <= 0 || roundsAmountElement.value > 12) {
         alert("Rounds must be between 1 and 12.");
         return;
       }
-
-      rounds = roundsAmountElement.value;
+      maxRounds = Number(roundsAmountElement.value);
     }
 
+    let points = null;
     if (pointsCheckBoxElement.checked) {
       if (pointsAmountElement.value < 100 || pointsAmountElement.value > 7500) {
         alert("Points must be between 100 and 7500.");
         return;
       }
-
-      points = pointsAmountElement.value;
+      points = Number(pointsAmountElement.value);
     }
 
     if (lifeline <= 2) {
@@ -195,6 +237,34 @@ function nextPage() {
       return;
     }
 
+    // NEW: persist settings so game.html can use them
+    setJSON("teamNames", [
+      teamNameElement.item(0).value,
+      teamNameElement.item(1).value,
+    ]);
+    setJSON("maxRounds", maxRounds);
+    setJSON("points", points);
+    setJSON(
+      "lifelines",
+      Array.from(lifelineElement)
+        .filter((el) => el.style.backgroundColor === selectedColor)
+        .map((el) => el.innerText),
+    );
+
     window.location.href = "./game.html";
+    return;
   }
+
+  if (page === "game.html") {
+    window.location.href = "./question.html";
+  }
+}
+
+// ===== Run on page load =====
+if (page === "game.html") {
+  roundDisplay(); 
+  restoreCells(); 
+}
+if (page === "question.html") {
+  question();
 }
