@@ -4,11 +4,14 @@ const unSelectedColor = "rgb(238, 130, 238)";
 const selectedCategories = 5;
 const MaxRounds = selectedCategories * 5;
 const page = window.location.pathname.split("/").pop() || "index.html";
+const choice = new Array('a', 'b', 'c', 'd')
 
 // ===== Page-local variables (only needed on one page) =====
 let selectedCount = 0; // index.html only
 let lifeline = 0; // team.html only
 let quizData; // question.html only
+let realAns; // question.html only
+let usrAns; // question.html only
 // ===== Storage helpers =====
 // JSON keeps types (numbers, booleans, arrays), so no "false" string bugs.
 function getJSON(key, fallback = null) {
@@ -47,6 +50,7 @@ const questionElement = document.querySelector("#side-Q > h1");
 const QChoiceElement = document.querySelectorAll(".choice");
 const gameNameElement = document.querySelectorAll(".team > span");
 const gameCategoryElement = document.querySelectorAll(".game-category");
+const doneBtnElement = document.querySelector('.done-btn')
 
 // ===== Listeners =====
 startBtnElement.forEach((button) => {
@@ -72,6 +76,7 @@ if (pointsCheckBoxElement) {
 QChoiceElement.forEach((choice) => {
   choice.addEventListener("click", selectChoice);
 });
+doneBtnElement.addEventListener("click",() => {submitAnwser(usrAns);})
 
 // ===== Functions =====
 function selectCategory(event) {
@@ -130,7 +135,18 @@ function selectQ(event) {
   window.location.href = "./question.html";
 }
 
-function selectChoice() {}
+function selectChoice(event) {
+  usrAns = Array.from(QChoiceElement).indexOf(event.currentTarget);
+  console.log(usrAns)
+  for(let i = 0; i < 4; i++){
+    if(usrAns === i)
+        QChoiceElement.item(i).style.backgroundColor = 'green'
+    else
+        QChoiceElement.item(i).style.backgroundColor = 'blanchedalmond'
+
+  }
+      
+}
 
 function displayGame() {
   gameNameElement.item(1).innerText = getJSON("teamNames")[0];
@@ -169,7 +185,7 @@ function question() {
   QChoiceElement.forEach((choice, index) => {
     choice.textContent = questionData.options[index]?.text ?? "";
   });
-
+  realAns = questionData.correctOptionId;
   console.log(questionData.prompt);
   console.log(questionData.options);
   console.log(questionData.correctOptionId);
@@ -209,6 +225,7 @@ function timer() {
     if (timeLeft < 0) {
       clearInterval(timerId);
       alert("Time's up!");
+      submitAnwser(usrAns)
     }
   }, 1000);
 }
@@ -236,6 +253,13 @@ function getRandomQuestion(category) {
   const randomIndex = Math.floor(Math.random() * questions.length);
 
   return questions[randomIndex];
+}
+
+function submitAnwser(usrAns){
+  console.log(choice[usrAns])
+  if(realAns == choice[usrAns])
+    console.log('winner!')
+  else console.log('loser!')
 }
 
 function nextPage() {
