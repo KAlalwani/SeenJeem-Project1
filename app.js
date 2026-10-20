@@ -117,6 +117,8 @@ function selectQ(event) {
   const rounds = getJSON("rounds");
 
   const cellIndex = Array.from(QElement).indexOf(cell);
+  const category = normalizeCategory(getJSON("categories", [])[cell.cellIndex]);
+  const pointValue = Number(cell.textContent.trim());
   const used = getJSON("usedQuestions", []);
 
   setJSON("answeringTeam", team1);
@@ -134,9 +136,24 @@ function selectQ(event) {
     setJSON("rounds", rounds + 1);
   }
 
-  sessionStorage.setItem("questionText", cell.innerHTML);
-  setJSON("questionPoints", Number(cell.textContent.trim()));
+  setJSON("questionCriteria", { category, pointValue });
+  setJSON("questionPoints", pointValue);
   window.location.href = "./question.html";
+}
+
+function normalizeCategory(category) {
+  const normalized = String(category || "").trim().toLowerCase();
+  const aliases = {
+    cartoon: "cartoons",
+    cartoons: "cartoons",
+    country: "countries",
+    countries: "countries",
+    people: "people",
+    history: "history",
+    coding: "coding",
+  };
+
+  return aliases[normalized] || normalized;
 }
 
 function selectChoice(event) {
@@ -175,12 +192,13 @@ function checkGameSettings() {
 
 function question() {
   timer();
-  let questionObject = sessionStorage.getItem("questionText");
-  console.log(questionObject);
-  console.log(getJSON("team1", true));
-  const questionData = getRandomQuestion("people");
+  const { category, pointValue } = getJSON("questionCriteria", {});
+  const questionData = getRandomQuestion(category, pointValue);
 
-  if (!questionData) return;
+  if (!questionData) {
+    questionElement.textContent = "No question is available for this board cell.";
+    return;
+  }
   questionElement.innerHTML = questionData.prompt;
   QChoiceElement.forEach((choice, index) => {
     choice.textContent = questionData.options[index]?.text ?? "";
@@ -254,13 +272,14 @@ async function loadQuizData() {
   quizData = await response.json();
 }
 
-function getRandomQuestion(category) {
+function getRandomQuestion(category, pointValue) {
   const questions = quizData.questionBank.filter(
-    (question) => question.category === category,
+    (question) =>
+      question.category === category && question.pointValue === pointValue,
   );
 
   if (questions.length === 0) {
-    console.error(`No questions found for ${category}`);
+    console.error(`No questions found for ${category} at ${pointValue} points`);
     return null;
   }
 

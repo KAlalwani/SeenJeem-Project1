@@ -1,72 +1,55 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "notes": [
-    "Use API data to enrich records, but keep playable questions in the local questionBank so gameplay does not depend on an API being online.",
-    "Person age and alive status should be calculated from birthDate/deathDate rather than maintained as stale values.",
-    "For copyrighted cartoon theme songs, store title/credits and an official listening URL; do not store full lyrics."
+    "Every category has five locally stored multiple-choice questions at each board value: 100, 200, 300, 400, and 500.",
+    "Questions remain playable offline after this file is loaded; APIs are used as source data and not required during a turn.",
+    "Use the pointValue field with the board cell value when selecting a question."
   ],
   "people": [
     {
       "id": "person-albert-einstein",
       "name": "Albert Einstein",
-      "nickname": null,
-      "occupation": ["theoretical physicist"],
+      "occupation": [
+        "theoretical physicist"
+      ],
       "birthDate": "1879-03-14",
       "deathDate": "1955-04-18",
-      "ageRule": "Calculate age at death from birthDate and deathDate.",
-      "isAliveRule": "deathDate is present => false; otherwise true.",
-      "image": { "provider": "Wikipedia REST API", "wikipediaTitle": "Albert Einstein", "url": null },
-      "achievements": ["Awarded the 1921 Nobel Prize in Physics for his services to theoretical physics, especially the discovery of the law of the photoelectric effect."],
-      "funFacts": ["Before his academic career took off, he worked at the Swiss Patent Office in Bern."],
-      "quotes": [],
-      "sources": ["https://en.wikipedia.org/wiki/Albert_Einstein", "https://www.nobelprize.org/prizes/physics/1921/einstein/facts/"]
+      "sources": [
+        "https://www.britannica.com/biography/Albert-Einstein"
+      ]
     },
     {
       "id": "person-marie-curie",
       "name": "Marie Curie",
-      "nickname": null,
-      "occupation": ["physicist", "chemist"],
+      "occupation": [
+        "physicist",
+        "chemist"
+      ],
       "birthDate": "1867-11-07",
       "deathDate": "1934-07-04",
-      "ageRule": "Calculate age at death from birthDate and deathDate.",
-      "isAliveRule": "deathDate is present => false; otherwise true.",
-      "image": { "provider": "Wikipedia REST API", "wikipediaTitle": "Marie Curie", "url": null },
-      "achievements": ["Won the 1903 Nobel Prize in Physics and the 1911 Nobel Prize in Chemistry."],
-      "funFacts": ["She was the first woman to receive a Nobel Prize."],
-      "quotes": [],
-      "sources": ["https://en.wikipedia.org/wiki/Marie_Curie", "https://www.nobelprize.org/prizes/physics/1903/marie-curie/facts/"]
+      "sources": [
+        "https://www.nobelprize.org/prizes/physics/1903/marie-curie/facts/"
+      ]
     }
   ],
   "cartoons": [
     {
       "id": "cartoon-spongebob-squarepants",
       "name": "SpongeBob SquarePants",
-      "description": "An animated comedy series about SpongeBob and his friends in the underwater city of Bikini Bottom.",
-      "image": { "provider": "TMDB", "tmdbId": null, "url": null },
       "firstAirDate": "1999-05-01",
       "originalNetwork": "Nickelodeon",
-      "otherNetworks": [],
-      "characters": ["SpongeBob SquarePants", "Patrick Star", "Squidward Tentacles", "Sandy Cheeks", "Mr. Krabs"],
-      "mainStoryEvents": ["SpongeBob works as a fry cook at the Krusty Krab.", "Many episodes follow the everyday adventures and mishaps of SpongeBob and his friends."],
-      "themeSong": { "title": "SpongeBob SquarePants Theme Song", "performerOrCredits": null, "officialUrl": null },
-      "lyricsPolicy": "Store song title, credits, quiz clues and official links only; do not store full lyrics.",
-      "funFacts": [],
-      "sources": ["https://en.wikipedia.org/wiki/SpongeBob_SquarePants", "https://developer.themoviedb.org/docs"]
+      "sources": [
+        "https://www.britannica.com/topic/SpongeBob-SquarePants"
+      ]
     },
     {
       "id": "cartoon-scooby-doo-where-are-you",
       "name": "Scooby-Doo, Where Are You!",
-      "description": "An animated mystery-comedy series following a group of friends and their talking Great Dane as they investigate strange happenings.",
-      "image": { "provider": "TMDB", "tmdbId": null, "url": null },
       "firstAirDate": "1969-09-13",
       "originalNetwork": "CBS",
-      "otherNetworks": [],
-      "characters": ["Scooby-Doo", "Shaggy Rogers", "Fred Jones", "Daphne Blake", "Velma Dinkley"],
-      "mainStoryEvents": ["The group investigates apparent hauntings and monsters.", "Mysteries typically reveal a human explanation behind the apparent supernatural event."],
-      "themeSong": { "title": null, "performerOrCredits": null, "officialUrl": null },
-      "lyricsPolicy": "Store song title, credits, quiz clues and official links only; do not store full lyrics.",
-      "funFacts": [],
-      "sources": ["https://en.wikipedia.org/wiki/Scooby-Doo,_Where_Are_You!", "https://developer.themoviedb.org/docs"]
+      "sources": [
+        "https://www.britannica.com/topic/Scooby-Doo"
+      ]
     }
   ],
   "countries": [
@@ -75,42 +58,21 @@
       "name": "Bahrain",
       "iso2": "bh",
       "capital": "Manama",
-      "flag": {
-        "colorUrl": "https://flagcdn.com/w320/bh.png",
-        "monochromeStrategy": "Use the color flag image with CSS filter: grayscale(1); verify visual contrast before using it in questions."
-      },
-      "coordinates": { "latitude": 26.0667, "longitude": 50.5577 },
-      "shape": { "provider": "World Atlas / Natural Earth country boundaries", "matchByCountryName": "Bahrain", "outlineUrl": null },
-      "funFacts": [],
-      "sources": ["https://restcountries.com/", "https://github.com/topojson/world-atlas"]
+      "flagUrl": "https://flagcdn.com/w320/bh.png"
     },
     {
       "id": "country-japan",
       "name": "Japan",
       "iso2": "jp",
       "capital": "Tokyo",
-      "flag": {
-        "colorUrl": "https://flagcdn.com/w320/jp.png",
-        "monochromeStrategy": "Use the color flag image with CSS filter: grayscale(1); verify visual contrast before using it in questions."
-      },
-      "coordinates": { "latitude": 36.2048, "longitude": 138.2529 },
-      "shape": { "provider": "World Atlas / Natural Earth country boundaries", "matchByCountryName": "Japan", "outlineUrl": null },
-      "funFacts": [],
-      "sources": ["https://restcountries.com/", "https://github.com/topojson/world-atlas"]
+      "flagUrl": "https://flagcdn.com/w320/jp.png"
     },
     {
       "id": "country-canada",
       "name": "Canada",
       "iso2": "ca",
       "capital": "Ottawa",
-      "flag": {
-        "colorUrl": "https://flagcdn.com/w320/ca.png",
-        "monochromeStrategy": "Use the color flag image with CSS filter: grayscale(1); verify visual contrast before using it in questions."
-      },
-      "coordinates": { "latitude": 56.1304, "longitude": -106.3468 },
-      "shape": { "provider": "World Atlas / Natural Earth country boundaries", "matchByCountryName": "Canada", "outlineUrl": null },
-      "funFacts": [],
-      "sources": ["https://restcountries.com/", "https://github.com/topojson/world-atlas"]
+      "flagUrl": "https://flagcdn.com/w320/ca.png"
     }
   ],
   "history": {
@@ -119,259 +81,4035 @@
         "id": "history-waterloo",
         "name": "Battle of Waterloo",
         "date": "1815-06-18",
-        "questionSafeSummary": "A coalition led by the Duke of Wellington and Gebhard Leberecht von Blücher defeated Napoleon's French army.",
-        "winner": "Seventh Coalition",
-        "participants": ["French Empire", "Seventh Coalition"],
-        "sources": ["https://en.wikipedia.org/wiki/Battle_of_Waterloo"]
+        "winner": "Seventh Coalition"
       },
       {
         "id": "history-sputnik-1",
         "name": "Launch of Sputnik 1",
         "date": "1957-10-04",
-        "questionSafeSummary": "The Soviet Union launched Sputnik 1, the first artificial Earth satellite.",
-        "winner": null,
-        "participants": ["Soviet Union"],
-        "sources": ["https://en.wikipedia.org/wiki/Sputnik_1"]
-      },
-      {
-        "id": "history-iphone-announcement",
-        "name": "Original iPhone announced",
-        "date": "2007-01-09",
-        "questionSafeSummary": "Apple announced the first iPhone; it went on sale later that year.",
-        "winner": null,
-        "participants": ["Apple"],
-        "sources": ["https://en.wikipedia.org/wiki/IPhone_(1st_generation)"]
-      }
-    ],
-    "objects": [
-      {
-        "id": "history-object-rotary-phone",
-        "name": "Rotary telephone",
-        "function": "A telephone that places a call by rotating a dial to signal the number being called.",
-        "periodOrContext": "Common before push-button phones became widespread.",
-        "imageSearchQuery": "rotary dial telephone historical photograph",
-        "imageUrl": null,
-        "sources": ["https://en.wikipedia.org/wiki/Rotary_dial"]
-      },
-      {
-        "id": "history-object-telegraph-key",
-        "name": "Telegraph key",
-        "function": "A switch used to send electrical signals, commonly in Morse code, through a telegraph circuit.",
-        "periodOrContext": "Used in telegraphy before modern digital communication.",
-        "imageSearchQuery": "Morse telegraph key historical artifact",
-        "imageUrl": null,
-        "sources": ["https://en.wikipedia.org/wiki/Telegraphy"]
+        "participants": [
+          "Soviet Union"
+        ]
       }
     ]
   },
   "questionBank": [
     {
-      "id": "people-001",
+      "id": "people-100-01",
       "category": "people",
+      "pointValue": 100,
       "difficulty": "easy",
       "type": "multiple-choice",
-      "prompt": "Which field was Albert Einstein best known for?",
-      "media": { "type": "person-image", "recordId": "person-albert-einstein" },
+      "prompt": "Which scientist developed the theory of relativity?",
+      "media": null,
       "options": [
-        { "id": "a", "text": "Theoretical physics" },
-        { "id": "b", "text": "Botany" },
-        { "id": "c", "text": "Architecture" },
-        { "id": "d", "text": "Linguistics" }
+        {
+          "id": "a",
+          "text": "Albert Einstein"
+        },
+        {
+          "id": "b",
+          "text": "Marie Curie"
+        },
+        {
+          "id": "c",
+          "text": "Isaac Newton"
+        },
+        {
+          "id": "d",
+          "text": "Galileo Galilei"
+        }
       ],
       "correctOptionId": "a",
-      "explanation": "Einstein was a theoretical physicist known for relativity and other major contributions to physics.",
-      "sourceUrls": ["https://en.wikipedia.org/wiki/Albert_Einstein"]
+      "explanation": "Albert Einstein developed the theory of relativity.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
     },
     {
-      "id": "cartoons-001",
+      "id": "people-100-02",
+      "category": "people",
+      "pointValue": 100,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Marie Curie is famous for her work in which two sciences?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Biology and geology"
+        },
+        {
+          "id": "b",
+          "text": "Physics and chemistry"
+        },
+        {
+          "id": "c",
+          "text": "Astronomy and mathematics"
+        },
+        {
+          "id": "d",
+          "text": "Medicine and engineering"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Curie made major contributions to both physics and chemistry.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "people-100-03",
+      "category": "people",
+      "pointValue": 100,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Who gave the 'I Have a Dream' speech?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Nelson Mandela"
+        },
+        {
+          "id": "b",
+          "text": "Mahatma Gandhi"
+        },
+        {
+          "id": "c",
+          "text": "Martin Luther King Jr."
+        },
+        {
+          "id": "d",
+          "text": "Frederick Douglass"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Martin Luther King Jr. delivered the speech during the 1963 March on Washington.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "people-100-04",
+      "category": "people",
+      "pointValue": 100,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Who was the first person to walk on the Moon?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Buzz Aldrin"
+        },
+        {
+          "id": "b",
+          "text": "Yuri Gagarin"
+        },
+        {
+          "id": "c",
+          "text": "John Glenn"
+        },
+        {
+          "id": "d",
+          "text": "Neil Armstrong"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Neil Armstrong stepped onto the Moon during Apollo 11 in 1969.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "people-100-05",
+      "category": "people",
+      "pointValue": 100,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Which artist painted the Mona Lisa?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Leonardo da Vinci"
+        },
+        {
+          "id": "b",
+          "text": "Vincent van Gogh"
+        },
+        {
+          "id": "c",
+          "text": "Pablo Picasso"
+        },
+        {
+          "id": "d",
+          "text": "Claude Monet"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Leonardo da Vinci painted the Mona Lisa.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "people-200-01",
+      "category": "people",
+      "pointValue": 200,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Ada Lovelace is often described as the first what?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Astronaut"
+        },
+        {
+          "id": "b",
+          "text": "Computer programmer"
+        },
+        {
+          "id": "c",
+          "text": "Chemist"
+        },
+        {
+          "id": "d",
+          "text": "Film director"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Her notes on Babbage's Analytical Engine included an algorithm.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "people-200-02",
+      "category": "people",
+      "pointValue": 200,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Which South African leader became president after apartheid ended?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Desmond Tutu"
+        },
+        {
+          "id": "b",
+          "text": "F. W. de Klerk"
+        },
+        {
+          "id": "c",
+          "text": "Nelson Mandela"
+        },
+        {
+          "id": "d",
+          "text": "Thabo Mbeki"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Nelson Mandela became South Africa's president in 1994.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "people-200-03",
+      "category": "people",
+      "pointValue": 200,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Frida Kahlo was a celebrated artist from which country?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Spain"
+        },
+        {
+          "id": "b",
+          "text": "Argentina"
+        },
+        {
+          "id": "c",
+          "text": "Brazil"
+        },
+        {
+          "id": "d",
+          "text": "Mexico"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Frida Kahlo was a Mexican painter.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "people-200-04",
+      "category": "people",
+      "pointValue": 200,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Who wrote Romeo and Juliet?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "William Shakespeare"
+        },
+        {
+          "id": "b",
+          "text": "Charles Dickens"
+        },
+        {
+          "id": "c",
+          "text": "Jane Austen"
+        },
+        {
+          "id": "d",
+          "text": "Mark Twain"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "William Shakespeare wrote Romeo and Juliet.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "people-200-05",
+      "category": "people",
+      "pointValue": 200,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Helen Keller became well known as an author and advocate despite being deaf and what?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Unable to speak"
+        },
+        {
+          "id": "b",
+          "text": "Blind"
+        },
+        {
+          "id": "c",
+          "text": "Unable to walk"
+        },
+        {
+          "id": "d",
+          "text": "Color-blind"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Helen Keller was deaf and blind.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "people-300-01",
+      "category": "people",
+      "pointValue": 300,
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "Which scientist was the first person to win Nobel Prizes in two different sciences?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Albert Einstein"
+        },
+        {
+          "id": "b",
+          "text": "Rosalind Franklin"
+        },
+        {
+          "id": "c",
+          "text": "Marie Curie"
+        },
+        {
+          "id": "d",
+          "text": "Niels Bohr"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Marie Curie won Nobel Prizes in Physics and Chemistry.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "people-300-02",
+      "category": "people",
+      "pointValue": 300,
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "Einstein's 1921 Nobel Prize recognized his work on which effect?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Greenhouse effect"
+        },
+        {
+          "id": "b",
+          "text": "Doppler effect"
+        },
+        {
+          "id": "c",
+          "text": "Placebo effect"
+        },
+        {
+          "id": "d",
+          "text": "Photoelectric effect"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Einstein received the prize chiefly for the law of the photoelectric effect.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "people-300-03",
+      "category": "people",
+      "pointValue": 300,
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "Rosa Parks is associated with a boycott of what form of transportation?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "City buses"
+        },
+        {
+          "id": "b",
+          "text": "Trains"
+        },
+        {
+          "id": "c",
+          "text": "Airplanes"
+        },
+        {
+          "id": "d",
+          "text": "Ferries"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Her arrest after refusing to give up her bus seat helped spark the Montgomery Bus Boycott.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "people-300-04",
+      "category": "people",
+      "pointValue": 300,
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "Malala Yousafzai became the youngest Nobel Peace Prize laureate for advocating for what?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Space exploration"
+        },
+        {
+          "id": "b",
+          "text": "Girls' education"
+        },
+        {
+          "id": "c",
+          "text": "Wildlife conservation"
+        },
+        {
+          "id": "d",
+          "text": "Free trade"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Malala advocates for girls' right to education.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "people-300-05",
+      "category": "people",
+      "pointValue": 300,
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "Mahatma Gandhi led India’s independence movement using which principle?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Military conquest"
+        },
+        {
+          "id": "b",
+          "text": "Monarchy"
+        },
+        {
+          "id": "c",
+          "text": "Nonviolent resistance"
+        },
+        {
+          "id": "d",
+          "text": "Industrialization"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Gandhi promoted nonviolent resistance.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "people-400-01",
+      "category": "people",
+      "pointValue": 400,
+      "difficulty": "hard",
+      "type": "multiple-choice",
+      "prompt": "Katherine Johnson's calculations were vital to early US missions in what field?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Oceanography"
+        },
+        {
+          "id": "b",
+          "text": "Agriculture"
+        },
+        {
+          "id": "c",
+          "text": "Architecture"
+        },
+        {
+          "id": "d",
+          "text": "Spaceflight"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Katherine Johnson calculated trajectories for NASA missions.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "people-400-02",
+      "category": "people",
+      "pointValue": 400,
+      "difficulty": "hard",
+      "type": "multiple-choice",
+      "prompt": "Alan Turing helped break German encrypted messages during World War II at which British site?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Bletchley Park"
+        },
+        {
+          "id": "b",
+          "text": "Stonehenge"
+        },
+        {
+          "id": "c",
+          "text": "Greenwich Observatory"
+        },
+        {
+          "id": "d",
+          "text": "Windsor Castle"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Turing worked at Bletchley Park during the war.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "people-400-03",
+      "category": "people",
+      "pointValue": 400,
+      "difficulty": "hard",
+      "type": "multiple-choice",
+      "prompt": "Ibn al-Haytham made foundational contributions to the study of what?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Plate tectonics"
+        },
+        {
+          "id": "b",
+          "text": "Optics"
+        },
+        {
+          "id": "c",
+          "text": "Genetics"
+        },
+        {
+          "id": "d",
+          "text": "Radioactivity"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Ibn al-Haytham is noted for major work in optics.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "people-400-04",
+      "category": "people",
+      "pointValue": 400,
+      "difficulty": "hard",
+      "type": "multiple-choice",
+      "prompt": "Wangari Maathai founded which environmental organization in Kenya?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "World Wildlife Fund"
+        },
+        {
+          "id": "b",
+          "text": "Peace Corps"
+        },
+        {
+          "id": "c",
+          "text": "Green Belt Movement"
+        },
+        {
+          "id": "d",
+          "text": "Red Cross"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Wangari Maathai founded the Green Belt Movement.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "people-400-05",
+      "category": "people",
+      "pointValue": 400,
+      "difficulty": "hard",
+      "type": "multiple-choice",
+      "prompt": "Jane Goodall is renowned for her long-term study of which animals?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Whales"
+        },
+        {
+          "id": "b",
+          "text": "Wolves"
+        },
+        {
+          "id": "c",
+          "text": "Penguins"
+        },
+        {
+          "id": "d",
+          "text": "Chimpanzees"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Jane Goodall's research transformed the study of chimpanzees.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "people-500-01",
+      "category": "people",
+      "pointValue": 500,
+      "difficulty": "expert",
+      "type": "multiple-choice",
+      "prompt": "Who was the first woman in space?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Valentina Tereshkova"
+        },
+        {
+          "id": "b",
+          "text": "Sally Ride"
+        },
+        {
+          "id": "c",
+          "text": "Mae Jemison"
+        },
+        {
+          "id": "d",
+          "text": "Eileen Collins"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Valentina Tereshkova flew to space in 1963.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "people-500-02",
+      "category": "people",
+      "pointValue": 500,
+      "difficulty": "expert",
+      "type": "multiple-choice",
+      "prompt": "Which civil-rights leader co-founded the National Association for the Advancement of Colored People (NAACP)?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Booker T. Washington"
+        },
+        {
+          "id": "b",
+          "text": "W. E. B. Du Bois"
+        },
+        {
+          "id": "c",
+          "text": "Thurgood Marshall"
+        },
+        {
+          "id": "d",
+          "text": "James Baldwin"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "W. E. B. Du Bois was a co-founder of the NAACP.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "people-500-03",
+      "category": "people",
+      "pointValue": 500,
+      "difficulty": "expert",
+      "type": "multiple-choice",
+      "prompt": "Which nurse is known as the founder of modern nursing?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Clara Barton"
+        },
+        {
+          "id": "b",
+          "text": "Mary Seacole"
+        },
+        {
+          "id": "c",
+          "text": "Florence Nightingale"
+        },
+        {
+          "id": "d",
+          "text": "Dorothea Dix"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Florence Nightingale helped establish modern nursing practices.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "people-500-04",
+      "category": "people",
+      "pointValue": 500,
+      "difficulty": "expert",
+      "type": "multiple-choice",
+      "prompt": "Srinivasa Ramanujan made major contributions to which subject?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Painting"
+        },
+        {
+          "id": "b",
+          "text": "Botany"
+        },
+        {
+          "id": "c",
+          "text": "Music"
+        },
+        {
+          "id": "d",
+          "text": "Mathematics"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Ramanujan was an influential mathematician.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "people-500-05",
+      "category": "people",
+      "pointValue": 500,
+      "difficulty": "expert",
+      "type": "multiple-choice",
+      "prompt": "Who discovered penicillin?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Alexander Fleming"
+        },
+        {
+          "id": "b",
+          "text": "Louis Pasteur"
+        },
+        {
+          "id": "c",
+          "text": "Gregor Mendel"
+        },
+        {
+          "id": "d",
+          "text": "Robert Koch"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Alexander Fleming discovered penicillin in 1928.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "cartoons-100-01",
       "category": "cartoons",
+      "pointValue": 100,
       "difficulty": "easy",
       "type": "multiple-choice",
-      "prompt": "Which network originally aired Scooby-Doo, Where Are You!?",
-      "media": { "type": "cartoon-poster", "recordId": "cartoon-scooby-doo-where-are-you" },
+      "prompt": "In SpongeBob SquarePants, where does SpongeBob work?",
+      "media": null,
       "options": [
-        { "id": "a", "text": "CBS" },
-        { "id": "b", "text": "Nickelodeon" },
-        { "id": "c", "text": "Disney Channel" },
-        { "id": "d", "text": "Cartoon Network" }
+        {
+          "id": "a",
+          "text": "The Krusty Krab"
+        },
+        {
+          "id": "b",
+          "text": "The Chum Bucket"
+        },
+        {
+          "id": "c",
+          "text": "The Salty Spitoon"
+        },
+        {
+          "id": "d",
+          "text": "Goo Lagoon"
+        }
       ],
       "correctOptionId": "a",
-      "explanation": "The original series premiered on CBS in 1969.",
-      "sourceUrls": ["https://en.wikipedia.org/wiki/Scooby-Doo,_Where_Are_You!"]
+      "explanation": "SpongeBob works as a fry cook at the Krusty Krab.",
+      "sourceUrls": [
+        "https://www.britannica.com/art/animation"
+      ]
     },
     {
-      "id": "countries-001",
+      "id": "cartoons-100-02",
+      "category": "cartoons",
+      "pointValue": 100,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "What kind of animal is Scooby-Doo?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Beagle"
+        },
+        {
+          "id": "b",
+          "text": "Great Dane"
+        },
+        {
+          "id": "c",
+          "text": "German shepherd"
+        },
+        {
+          "id": "d",
+          "text": "Wolf"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Scooby-Doo is a talking Great Dane.",
+      "sourceUrls": [
+        "https://www.britannica.com/art/animation"
+      ]
+    },
+    {
+      "id": "cartoons-100-03",
+      "category": "cartoons",
+      "pointValue": 100,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Which yellow cartoon character lives in a pineapple under the sea?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Bart Simpson"
+        },
+        {
+          "id": "b",
+          "text": "Pikachu"
+        },
+        {
+          "id": "c",
+          "text": "SpongeBob SquarePants"
+        },
+        {
+          "id": "d",
+          "text": "Tweety"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "SpongeBob lives in a pineapple in Bikini Bottom.",
+      "sourceUrls": [
+        "https://www.britannica.com/art/animation"
+      ]
+    },
+    {
+      "id": "cartoons-100-04",
+      "category": "cartoons",
+      "pointValue": 100,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "What is the name of Mickey Mouse's dog?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Goofy"
+        },
+        {
+          "id": "b",
+          "text": "Donald"
+        },
+        {
+          "id": "c",
+          "text": "Max"
+        },
+        {
+          "id": "d",
+          "text": "Pluto"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Pluto is Mickey Mouse's pet dog.",
+      "sourceUrls": [
+        "https://www.britannica.com/art/animation"
+      ]
+    },
+    {
+      "id": "cartoons-100-05",
+      "category": "cartoons",
+      "pointValue": 100,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Bluey is a young dog of which breed?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Blue Heeler"
+        },
+        {
+          "id": "b",
+          "text": "Dalmatian"
+        },
+        {
+          "id": "c",
+          "text": "Golden Retriever"
+        },
+        {
+          "id": "d",
+          "text": "Pug"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Bluey and her family are Blue Heelers.",
+      "sourceUrls": [
+        "https://www.britannica.com/art/animation"
+      ]
+    },
+    {
+      "id": "cartoons-200-01",
+      "category": "cartoons",
+      "pointValue": 200,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Who created SpongeBob SquarePants?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Matt Groening"
+        },
+        {
+          "id": "b",
+          "text": "Stephen Hillenburg"
+        },
+        {
+          "id": "c",
+          "text": "Walt Disney"
+        },
+        {
+          "id": "d",
+          "text": "Seth MacFarlane"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Stephen Hillenburg created SpongeBob SquarePants.",
+      "sourceUrls": [
+        "https://www.britannica.com/art/animation"
+      ]
+    },
+    {
+      "id": "cartoons-200-02",
+      "category": "cartoons",
+      "pointValue": 200,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "The Simpsons originally began as shorts on which program?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Saturday Night Live"
+        },
+        {
+          "id": "b",
+          "text": "Sesame Street"
+        },
+        {
+          "id": "c",
+          "text": "The Tracey Ullman Show"
+        },
+        {
+          "id": "d",
+          "text": "The Muppet Show"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "The Simpsons first appeared as shorts on The Tracey Ullman Show.",
+      "sourceUrls": [
+        "https://www.britannica.com/art/animation"
+      ]
+    },
+    {
+      "id": "cartoons-200-03",
+      "category": "cartoons",
+      "pointValue": 200,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Who is Shaggy's best-known canine friend?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Scrappy-Doo"
+        },
+        {
+          "id": "b",
+          "text": "Odie"
+        },
+        {
+          "id": "c",
+          "text": "Snoopy"
+        },
+        {
+          "id": "d",
+          "text": "Scooby-Doo"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Shaggy and Scooby-Doo are close friends.",
+      "sourceUrls": [
+        "https://www.britannica.com/art/animation"
+      ]
+    },
+    {
+      "id": "cartoons-200-04",
+      "category": "cartoons",
+      "pointValue": 200,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "In Avatar: The Last Airbender, which element does Aang begin the series already able to bend?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Air"
+        },
+        {
+          "id": "b",
+          "text": "Water"
+        },
+        {
+          "id": "c",
+          "text": "Earth"
+        },
+        {
+          "id": "d",
+          "text": "Fire"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Aang is an Air Nomad and starts as an airbender.",
+      "sourceUrls": [
+        "https://www.britannica.com/art/animation"
+      ]
+    },
+    {
+      "id": "cartoons-200-05",
+      "category": "cartoons",
+      "pointValue": 200,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "What city is the main setting of The Powerpuff Girls?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Springfield"
+        },
+        {
+          "id": "b",
+          "text": "Townsville"
+        },
+        {
+          "id": "c",
+          "text": "Bikini Bottom"
+        },
+        {
+          "id": "d",
+          "text": "Bedrock"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "The Powerpuff Girls protect Townsville.",
+      "sourceUrls": [
+        "https://www.britannica.com/art/animation"
+      ]
+    },
+    {
+      "id": "cartoons-300-01",
+      "category": "cartoons",
+      "pointValue": 300,
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "Which character owns the Krusty Krab?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Plankton"
+        },
+        {
+          "id": "b",
+          "text": "Squidward"
+        },
+        {
+          "id": "c",
+          "text": "Mr. Krabs"
+        },
+        {
+          "id": "d",
+          "text": "Patrick"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Mr. Krabs owns and runs the Krusty Krab.",
+      "sourceUrls": [
+        "https://www.britannica.com/art/animation"
+      ]
+    },
+    {
+      "id": "cartoons-300-02",
+      "category": "cartoons",
+      "pointValue": 300,
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "What is the name of the mystery-solving group in Scooby-Doo?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Ghostbusters"
+        },
+        {
+          "id": "b",
+          "text": "The Detectives"
+        },
+        {
+          "id": "c",
+          "text": "Monster Squad"
+        },
+        {
+          "id": "d",
+          "text": "Mystery Inc."
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Scooby and his friends are commonly called Mystery Inc.",
+      "sourceUrls": [
+        "https://www.britannica.com/art/animation"
+      ]
+    },
+    {
+      "id": "cartoons-300-03",
+      "category": "cartoons",
+      "pointValue": 300,
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "Which Disney film features the sisters Elsa and Anna?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Frozen"
+        },
+        {
+          "id": "b",
+          "text": "Moana"
+        },
+        {
+          "id": "c",
+          "text": "Tangled"
+        },
+        {
+          "id": "d",
+          "text": "Encanto"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Elsa and Anna are sisters in Frozen.",
+      "sourceUrls": [
+        "https://www.britannica.com/art/animation"
+      ]
+    },
+    {
+      "id": "cartoons-300-04",
+      "category": "cartoons",
+      "pointValue": 300,
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "In The Lion King, who is Simba's father?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Scar"
+        },
+        {
+          "id": "b",
+          "text": "Mufasa"
+        },
+        {
+          "id": "c",
+          "text": "Timon"
+        },
+        {
+          "id": "d",
+          "text": "Zazu"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Mufasa is Simba's father and king of the Pride Lands.",
+      "sourceUrls": [
+        "https://www.britannica.com/art/animation"
+      ]
+    },
+    {
+      "id": "cartoons-300-05",
+      "category": "cartoons",
+      "pointValue": 300,
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "Which animated series follows a boy named Finn and a dog named Jake?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Steven Universe"
+        },
+        {
+          "id": "b",
+          "text": "Gravity Falls"
+        },
+        {
+          "id": "c",
+          "text": "Adventure Time"
+        },
+        {
+          "id": "d",
+          "text": "Danny Phantom"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Adventure Time centers on Finn and Jake.",
+      "sourceUrls": [
+        "https://www.britannica.com/art/animation"
+      ]
+    },
+    {
+      "id": "cartoons-400-01",
+      "category": "cartoons",
+      "pointValue": 400,
+      "difficulty": "hard",
+      "type": "multiple-choice",
+      "prompt": "What is the name of the fictional town in The Simpsons?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Quahog"
+        },
+        {
+          "id": "b",
+          "text": "South Park"
+        },
+        {
+          "id": "c",
+          "text": "Elwood City"
+        },
+        {
+          "id": "d",
+          "text": "Springfield"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "The Simpsons live in Springfield.",
+      "sourceUrls": [
+        "https://www.britannica.com/art/animation"
+      ]
+    },
+    {
+      "id": "cartoons-400-02",
+      "category": "cartoons",
+      "pointValue": 400,
+      "difficulty": "hard",
+      "type": "multiple-choice",
+      "prompt": "Studio Ghibli's Spirited Away was directed by whom?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Hayao Miyazaki"
+        },
+        {
+          "id": "b",
+          "text": "Makoto Shinkai"
+        },
+        {
+          "id": "c",
+          "text": "Mamoru Hosoda"
+        },
+        {
+          "id": "d",
+          "text": "Isao Takahata"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Hayao Miyazaki directed Spirited Away.",
+      "sourceUrls": [
+        "https://www.britannica.com/art/animation"
+      ]
+    },
+    {
+      "id": "cartoons-400-03",
+      "category": "cartoons",
+      "pointValue": 400,
+      "difficulty": "hard",
+      "type": "multiple-choice",
+      "prompt": "Which cartoon rabbit is famous for saying 'What's up, Doc?'",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Roger Rabbit"
+        },
+        {
+          "id": "b",
+          "text": "Bugs Bunny"
+        },
+        {
+          "id": "c",
+          "text": "Peter Rabbit"
+        },
+        {
+          "id": "d",
+          "text": "Oswald"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Bugs Bunny is known for that catchphrase.",
+      "sourceUrls": [
+        "https://www.britannica.com/art/animation"
+      ]
+    },
+    {
+      "id": "cartoons-400-04",
+      "category": "cartoons",
+      "pointValue": 400,
+      "difficulty": "hard",
+      "type": "multiple-choice",
+      "prompt": "Who is the genius boy inventor in the animated series Dexter's Laboratory?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Jimmy Neutron"
+        },
+        {
+          "id": "b",
+          "text": "Johnny Bravo"
+        },
+        {
+          "id": "c",
+          "text": "Dexter"
+        },
+        {
+          "id": "d",
+          "text": "Arnold"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Dexter secretly operates a laboratory in his bedroom.",
+      "sourceUrls": [
+        "https://www.britannica.com/art/animation"
+      ]
+    },
+    {
+      "id": "cartoons-400-05",
+      "category": "cartoons",
+      "pointValue": 400,
+      "difficulty": "hard",
+      "type": "multiple-choice",
+      "prompt": "Which Nickelodeon animated series features a boy genius with a secret laboratory?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Jimmy Neutron"
+        },
+        {
+          "id": "b",
+          "text": "Hey Arnold!"
+        },
+        {
+          "id": "c",
+          "text": "Rugrats"
+        },
+        {
+          "id": "d",
+          "text": "Dexter's Laboratory"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "The Adventures of Jimmy Neutron: Boy Genius follows Jimmy and his inventions.",
+      "sourceUrls": [
+        "https://www.britannica.com/art/animation"
+      ]
+    },
+    {
+      "id": "cartoons-500-01",
+      "category": "cartoons",
+      "pointValue": 500,
+      "difficulty": "expert",
+      "type": "multiple-choice",
+      "prompt": "Which film was Disney's first full-length animated feature?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Snow White and the Seven Dwarfs"
+        },
+        {
+          "id": "b",
+          "text": "Fantasia"
+        },
+        {
+          "id": "c",
+          "text": "Pinocchio"
+        },
+        {
+          "id": "d",
+          "text": "Bambi"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Snow White and the Seven Dwarfs premiered in 1937 as Disney's first feature-length animated film.",
+      "sourceUrls": [
+        "https://www.britannica.com/art/animation"
+      ]
+    },
+    {
+      "id": "cartoons-500-02",
+      "category": "cartoons",
+      "pointValue": 500,
+      "difficulty": "expert",
+      "type": "multiple-choice",
+      "prompt": "In Scooby-Doo, which character is usually associated with solving clues and saying 'Jinkies!'?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Daphne Blake"
+        },
+        {
+          "id": "b",
+          "text": "Velma Dinkley"
+        },
+        {
+          "id": "c",
+          "text": "Fred Jones"
+        },
+        {
+          "id": "d",
+          "text": "Shaggy Rogers"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Velma is the clue-focused member of the group.",
+      "sourceUrls": [
+        "https://www.britannica.com/art/animation"
+      ]
+    },
+    {
+      "id": "cartoons-500-03",
+      "category": "cartoons",
+      "pointValue": 500,
+      "difficulty": "expert",
+      "type": "multiple-choice",
+      "prompt": "What is the name of the ogre in Shrek?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Fiona"
+        },
+        {
+          "id": "b",
+          "text": "Donkey"
+        },
+        {
+          "id": "c",
+          "text": "Shrek"
+        },
+        {
+          "id": "d",
+          "text": "Puss in Boots"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Shrek is the title character of the film.",
+      "sourceUrls": [
+        "https://www.britannica.com/art/animation"
+      ]
+    },
+    {
+      "id": "cartoons-500-04",
+      "category": "cartoons",
+      "pointValue": 500,
+      "difficulty": "expert",
+      "type": "multiple-choice",
+      "prompt": "Which animated Pixar film is set largely inside the mind of a young girl named Riley?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Soul"
+        },
+        {
+          "id": "b",
+          "text": "Coco"
+        },
+        {
+          "id": "c",
+          "text": "Up"
+        },
+        {
+          "id": "d",
+          "text": "Inside Out"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Inside Out depicts emotions inside Riley's mind.",
+      "sourceUrls": [
+        "https://www.britannica.com/art/animation"
+      ]
+    },
+    {
+      "id": "cartoons-500-05",
+      "category": "cartoons",
+      "pointValue": 500,
+      "difficulty": "expert",
+      "type": "multiple-choice",
+      "prompt": "What is the name of the toy cowboy in Toy Story?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Woody"
+        },
+        {
+          "id": "b",
+          "text": "Buzz Lightyear"
+        },
+        {
+          "id": "c",
+          "text": "Jessie"
+        },
+        {
+          "id": "d",
+          "text": "Rex"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Woody is Andy's cowboy doll.",
+      "sourceUrls": [
+        "https://www.britannica.com/art/animation"
+      ]
+    },
+    {
+      "id": "countries-100-01",
       "category": "countries",
+      "pointValue": 100,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "What is the capital of Japan?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Tokyo"
+        },
+        {
+          "id": "b",
+          "text": "Kyoto"
+        },
+        {
+          "id": "c",
+          "text": "Osaka"
+        },
+        {
+          "id": "d",
+          "text": "Nagoya"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Tokyo is Japan's capital.",
+      "sourceUrls": [
+        "https://restcountries.com/v3.1/all?fields=name,capital,region,currencies,languages,continents,population,area,independent"
+      ]
+    },
+    {
+      "id": "countries-100-02",
+      "category": "countries",
+      "pointValue": 100,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "What is the capital of Canada?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Toronto"
+        },
+        {
+          "id": "b",
+          "text": "Ottawa"
+        },
+        {
+          "id": "c",
+          "text": "Vancouver"
+        },
+        {
+          "id": "d",
+          "text": "Montreal"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Ottawa is Canada's capital.",
+      "sourceUrls": [
+        "https://restcountries.com/v3.1/all?fields=name,capital,region,currencies,languages,continents,population,area,independent"
+      ]
+    },
+    {
+      "id": "countries-100-03",
+      "category": "countries",
+      "pointValue": 100,
       "difficulty": "easy",
       "type": "multiple-choice",
       "prompt": "What is the capital of Bahrain?",
       "media": null,
       "options": [
-        { "id": "a", "text": "Manama" },
-        { "id": "b", "text": "Muharraq" },
-        { "id": "c", "text": "Riffa" },
-        { "id": "d", "text": "Hamad Town" }
+        {
+          "id": "a",
+          "text": "Muharraq"
+        },
+        {
+          "id": "b",
+          "text": "Riffa"
+        },
+        {
+          "id": "c",
+          "text": "Manama"
+        },
+        {
+          "id": "d",
+          "text": "Hamad Town"
+        }
       ],
-      "correctOptionId": "a",
-      "explanation": "Manama is the capital of Bahrain.",
-      "sourceUrls": ["https://restcountries.com/"]
+      "correctOptionId": "c",
+      "explanation": "Manama is Bahrain's capital.",
+      "sourceUrls": [
+        "https://restcountries.com/v3.1/all?fields=name,capital,region,currencies,languages,continents,population,area,independent"
+      ]
     },
     {
-      "id": "history-001",
+      "id": "countries-100-04",
+      "category": "countries",
+      "pointValue": 100,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Which country is shaped like a boot on maps of Europe?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Greece"
+        },
+        {
+          "id": "b",
+          "text": "Portugal"
+        },
+        {
+          "id": "c",
+          "text": "Croatia"
+        },
+        {
+          "id": "d",
+          "text": "Italy"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Italy is often described as boot-shaped.",
+      "sourceUrls": [
+        "https://restcountries.com/v3.1/all?fields=name,capital,region,currencies,languages,continents,population,area,independent"
+      ]
+    },
+    {
+      "id": "countries-100-05",
+      "category": "countries",
+      "pointValue": 100,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Which country has a maple leaf on its flag?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Canada"
+        },
+        {
+          "id": "b",
+          "text": "Austria"
+        },
+        {
+          "id": "c",
+          "text": "Denmark"
+        },
+        {
+          "id": "d",
+          "text": "Finland"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Canada's flag features a red maple leaf.",
+      "sourceUrls": [
+        "https://restcountries.com/v3.1/all?fields=name,capital,region,currencies,languages,continents,population,area,independent"
+      ]
+    },
+    {
+      "id": "countries-200-01",
+      "category": "countries",
+      "pointValue": 200,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Which continent is Egypt part of?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Asia"
+        },
+        {
+          "id": "b",
+          "text": "Africa"
+        },
+        {
+          "id": "c",
+          "text": "Europe"
+        },
+        {
+          "id": "d",
+          "text": "South America"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Egypt is in northeastern Africa, with the Sinai Peninsula in Asia.",
+      "sourceUrls": [
+        "https://restcountries.com/v3.1/all?fields=name,capital,region,currencies,languages,continents,population,area,independent"
+      ]
+    },
+    {
+      "id": "countries-200-02",
+      "category": "countries",
+      "pointValue": 200,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "What is the official language of Brazil?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Spanish"
+        },
+        {
+          "id": "b",
+          "text": "French"
+        },
+        {
+          "id": "c",
+          "text": "Portuguese"
+        },
+        {
+          "id": "d",
+          "text": "English"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Portuguese is Brazil's official language.",
+      "sourceUrls": [
+        "https://restcountries.com/v3.1/all?fields=name,capital,region,currencies,languages,continents,population,area,independent"
+      ]
+    },
+    {
+      "id": "countries-200-03",
+      "category": "countries",
+      "pointValue": 200,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Which currency is used in Japan?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Won"
+        },
+        {
+          "id": "b",
+          "text": "Yuan"
+        },
+        {
+          "id": "c",
+          "text": "Rupee"
+        },
+        {
+          "id": "d",
+          "text": "Yen"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Japan uses the yen.",
+      "sourceUrls": [
+        "https://restcountries.com/v3.1/all?fields=name,capital,region,currencies,languages,continents,population,area,independent"
+      ]
+    },
+    {
+      "id": "countries-200-04",
+      "category": "countries",
+      "pointValue": 200,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Which country is home to the city of Marrakech?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Morocco"
+        },
+        {
+          "id": "b",
+          "text": "Tunisia"
+        },
+        {
+          "id": "c",
+          "text": "Jordan"
+        },
+        {
+          "id": "d",
+          "text": "Peru"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Marrakech is a city in Morocco.",
+      "sourceUrls": [
+        "https://restcountries.com/v3.1/all?fields=name,capital,region,currencies,languages,continents,population,area,independent"
+      ]
+    },
+    {
+      "id": "countries-200-05",
+      "category": "countries",
+      "pointValue": 200,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Which country is often called the Land of the Rising Sun?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "China"
+        },
+        {
+          "id": "b",
+          "text": "Japan"
+        },
+        {
+          "id": "c",
+          "text": "Thailand"
+        },
+        {
+          "id": "d",
+          "text": "South Korea"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Japan is widely known by that nickname.",
+      "sourceUrls": [
+        "https://restcountries.com/v3.1/all?fields=name,capital,region,currencies,languages,continents,population,area,independent"
+      ]
+    },
+    {
+      "id": "countries-300-01",
+      "category": "countries",
+      "pointValue": 300,
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "Which river flows through Egypt and is central to its history?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Amazon"
+        },
+        {
+          "id": "b",
+          "text": "Danube"
+        },
+        {
+          "id": "c",
+          "text": "Nile"
+        },
+        {
+          "id": "d",
+          "text": "Yangtze"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "The Nile flows through Egypt.",
+      "sourceUrls": [
+        "https://restcountries.com/v3.1/all?fields=name,capital,region,currencies,languages,continents,population,area,independent"
+      ]
+    },
+    {
+      "id": "countries-300-02",
+      "category": "countries",
+      "pointValue": 300,
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "Mount Kilimanjaro is in which country?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Kenya"
+        },
+        {
+          "id": "b",
+          "text": "Ethiopia"
+        },
+        {
+          "id": "c",
+          "text": "Uganda"
+        },
+        {
+          "id": "d",
+          "text": "Tanzania"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Mount Kilimanjaro is in Tanzania.",
+      "sourceUrls": [
+        "https://restcountries.com/v3.1/all?fields=name,capital,region,currencies,languages,continents,population,area,independent"
+      ]
+    },
+    {
+      "id": "countries-300-03",
+      "category": "countries",
+      "pointValue": 300,
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "Which country is the largest by land area?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Russia"
+        },
+        {
+          "id": "b",
+          "text": "Canada"
+        },
+        {
+          "id": "c",
+          "text": "China"
+        },
+        {
+          "id": "d",
+          "text": "United States"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Russia is the world's largest country by land area.",
+      "sourceUrls": [
+        "https://restcountries.com/v3.1/all?fields=name,capital,region,currencies,languages,continents,population,area,independent"
+      ]
+    },
+    {
+      "id": "countries-300-04",
+      "category": "countries",
+      "pointValue": 300,
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "Which country has the most people in the world as of the mid-2020s?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "China"
+        },
+        {
+          "id": "b",
+          "text": "India"
+        },
+        {
+          "id": "c",
+          "text": "United States"
+        },
+        {
+          "id": "d",
+          "text": "Indonesia"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "India has the largest population in current UN estimates.",
+      "sourceUrls": [
+        "https://restcountries.com/v3.1/all?fields=name,capital,region,currencies,languages,continents,population,area,independent"
+      ]
+    },
+    {
+      "id": "countries-300-05",
+      "category": "countries",
+      "pointValue": 300,
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "What is the capital of Australia?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Sydney"
+        },
+        {
+          "id": "b",
+          "text": "Melbourne"
+        },
+        {
+          "id": "c",
+          "text": "Canberra"
+        },
+        {
+          "id": "d",
+          "text": "Perth"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Canberra is Australia's capital.",
+      "sourceUrls": [
+        "https://restcountries.com/v3.1/all?fields=name,capital,region,currencies,languages,continents,population,area,independent"
+      ]
+    },
+    {
+      "id": "countries-400-01",
+      "category": "countries",
+      "pointValue": 400,
+      "difficulty": "hard",
+      "type": "multiple-choice",
+      "prompt": "Which narrow waterway separates Europe and Africa at Spain and Morocco?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Bering Strait"
+        },
+        {
+          "id": "b",
+          "text": "Bosporus"
+        },
+        {
+          "id": "c",
+          "text": "Strait of Hormuz"
+        },
+        {
+          "id": "d",
+          "text": "Strait of Gibraltar"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "The Strait of Gibraltar lies between Spain and Morocco.",
+      "sourceUrls": [
+        "https://restcountries.com/v3.1/all?fields=name,capital,region,currencies,languages,continents,population,area,independent"
+      ]
+    },
+    {
+      "id": "countries-400-02",
+      "category": "countries",
+      "pointValue": 400,
+      "difficulty": "hard",
+      "type": "multiple-choice",
+      "prompt": "Which country contains the ancient city of Petra?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Jordan"
+        },
+        {
+          "id": "b",
+          "text": "Lebanon"
+        },
+        {
+          "id": "c",
+          "text": "Greece"
+        },
+        {
+          "id": "d",
+          "text": "Turkey"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Petra is in Jordan.",
+      "sourceUrls": [
+        "https://restcountries.com/v3.1/all?fields=name,capital,region,currencies,languages,continents,population,area,independent"
+      ]
+    },
+    {
+      "id": "countries-400-03",
+      "category": "countries",
+      "pointValue": 400,
+      "difficulty": "hard",
+      "type": "multiple-choice",
+      "prompt": "Which desert covers much of northern Africa?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Gobi"
+        },
+        {
+          "id": "b",
+          "text": "Sahara"
+        },
+        {
+          "id": "c",
+          "text": "Atacama"
+        },
+        {
+          "id": "d",
+          "text": "Kalahari"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "The Sahara spans much of North Africa.",
+      "sourceUrls": [
+        "https://restcountries.com/v3.1/all?fields=name,capital,region,currencies,languages,continents,population,area,independent"
+      ]
+    },
+    {
+      "id": "countries-400-04",
+      "category": "countries",
+      "pointValue": 400,
+      "difficulty": "hard",
+      "type": "multiple-choice",
+      "prompt": "The island of Madagascar lies off the coast of which continent?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Asia"
+        },
+        {
+          "id": "b",
+          "text": "Europe"
+        },
+        {
+          "id": "c",
+          "text": "Africa"
+        },
+        {
+          "id": "d",
+          "text": "Australia"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Madagascar is in the Indian Ocean off southeastern Africa.",
+      "sourceUrls": [
+        "https://restcountries.com/v3.1/all?fields=name,capital,region,currencies,languages,continents,population,area,independent"
+      ]
+    },
+    {
+      "id": "countries-400-05",
+      "category": "countries",
+      "pointValue": 400,
+      "difficulty": "hard",
+      "type": "multiple-choice",
+      "prompt": "Which country shares the longest international land border with the United States?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Mexico"
+        },
+        {
+          "id": "b",
+          "text": "Russia"
+        },
+        {
+          "id": "c",
+          "text": "Cuba"
+        },
+        {
+          "id": "d",
+          "text": "Canada"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Canada and the United States share the longest international border.",
+      "sourceUrls": [
+        "https://restcountries.com/v3.1/all?fields=name,capital,region,currencies,languages,continents,population,area,independent"
+      ]
+    },
+    {
+      "id": "countries-500-01",
+      "category": "countries",
+      "pointValue": 500,
+      "difficulty": "expert",
+      "type": "multiple-choice",
+      "prompt": "Which country is made up of more than 17,000 islands?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Indonesia"
+        },
+        {
+          "id": "b",
+          "text": "Philippines"
+        },
+        {
+          "id": "c",
+          "text": "Japan"
+        },
+        {
+          "id": "d",
+          "text": "New Zealand"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Indonesia is a vast archipelagic country.",
+      "sourceUrls": [
+        "https://restcountries.com/v3.1/all?fields=name,capital,region,currencies,languages,continents,population,area,independent"
+      ]
+    },
+    {
+      "id": "countries-500-02",
+      "category": "countries",
+      "pointValue": 500,
+      "difficulty": "expert",
+      "type": "multiple-choice",
+      "prompt": "What is the capital of Kazakhstan?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Almaty"
+        },
+        {
+          "id": "b",
+          "text": "Astana"
+        },
+        {
+          "id": "c",
+          "text": "Tashkent"
+        },
+        {
+          "id": "d",
+          "text": "Bishkek"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Astana is Kazakhstan's capital.",
+      "sourceUrls": [
+        "https://restcountries.com/v3.1/all?fields=name,capital,region,currencies,languages,continents,population,area,independent"
+      ]
+    },
+    {
+      "id": "countries-500-03",
+      "category": "countries",
+      "pointValue": 500,
+      "difficulty": "expert",
+      "type": "multiple-choice",
+      "prompt": "Which country has both the Atlantic and Pacific coasts in Central America?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Costa Rica"
+        },
+        {
+          "id": "b",
+          "text": "Honduras"
+        },
+        {
+          "id": "c",
+          "text": "Panama"
+        },
+        {
+          "id": "d",
+          "text": "Belize"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Panama has coastlines on both oceans.",
+      "sourceUrls": [
+        "https://restcountries.com/v3.1/all?fields=name,capital,region,currencies,languages,continents,population,area,independent"
+      ]
+    },
+    {
+      "id": "countries-500-04",
+      "category": "countries",
+      "pointValue": 500,
+      "difficulty": "expert",
+      "type": "multiple-choice",
+      "prompt": "Which country surrounds Lesotho?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Botswana"
+        },
+        {
+          "id": "b",
+          "text": "Eswatini"
+        },
+        {
+          "id": "c",
+          "text": "Namibia"
+        },
+        {
+          "id": "d",
+          "text": "South Africa"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Lesotho is an enclave entirely surrounded by South Africa.",
+      "sourceUrls": [
+        "https://restcountries.com/v3.1/all?fields=name,capital,region,currencies,languages,continents,population,area,independent"
+      ]
+    },
+    {
+      "id": "countries-500-05",
+      "category": "countries",
+      "pointValue": 500,
+      "difficulty": "expert",
+      "type": "multiple-choice",
+      "prompt": "Which country has the world's largest number of time zones when overseas territories are included?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "France"
+        },
+        {
+          "id": "b",
+          "text": "Russia"
+        },
+        {
+          "id": "c",
+          "text": "United States"
+        },
+        {
+          "id": "d",
+          "text": "Australia"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "France has the most time zones when its overseas territories are counted.",
+      "sourceUrls": [
+        "https://restcountries.com/v3.1/all?fields=name,capital,region,currencies,languages,continents,population,area,independent"
+      ]
+    },
+    {
+      "id": "history-100-01",
       "category": "history",
+      "pointValue": 100,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Which invention allowed people to send messages long distances using electrical signals in the 1800s?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Telegraph"
+        },
+        {
+          "id": "b",
+          "text": "Television"
+        },
+        {
+          "id": "c",
+          "text": "Smartphone"
+        },
+        {
+          "id": "d",
+          "text": "Internet"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "The telegraph transmitted electrical signals over wires.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "history-100-02",
+      "category": "history",
+      "pointValue": 100,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Who was the first president of the United States?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Abraham Lincoln"
+        },
+        {
+          "id": "b",
+          "text": "George Washington"
+        },
+        {
+          "id": "c",
+          "text": "Thomas Jefferson"
+        },
+        {
+          "id": "d",
+          "text": "John Adams"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "George Washington was the first US president.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "history-100-03",
+      "category": "history",
+      "pointValue": 100,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "The pyramids of Giza were built in which ancient civilization?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Ancient Rome"
+        },
+        {
+          "id": "b",
+          "text": "Ancient Greece"
+        },
+        {
+          "id": "c",
+          "text": "Ancient Egypt"
+        },
+        {
+          "id": "d",
+          "text": "Maya civilization"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "The pyramids of Giza were built in ancient Egypt.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "history-100-04",
+      "category": "history",
+      "pointValue": 100,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Which ship carried the Pilgrims to North America in 1620?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Santa Maria"
+        },
+        {
+          "id": "b",
+          "text": "Beagle"
+        },
+        {
+          "id": "c",
+          "text": "Endeavour"
+        },
+        {
+          "id": "d",
+          "text": "Mayflower"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "The Mayflower carried English Pilgrims in 1620.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "history-100-05",
+      "category": "history",
+      "pointValue": 100,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Who is credited with inventing the telephone?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Alexander Graham Bell"
+        },
+        {
+          "id": "b",
+          "text": "Thomas Edison"
+        },
+        {
+          "id": "c",
+          "text": "Nikola Tesla"
+        },
+        {
+          "id": "d",
+          "text": "Guglielmo Marconi"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Alexander Graham Bell is widely credited with inventing the telephone.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "history-200-01",
+      "category": "history",
+      "pointValue": 200,
       "difficulty": "easy",
       "type": "multiple-choice",
       "prompt": "Which came first?",
       "media": null,
       "options": [
-        { "id": "a", "text": "The telegraph" },
-        { "id": "b", "text": "The smartphone" },
-        { "id": "c", "text": "The touchscreen smartphone" },
-        { "id": "d", "text": "The mobile app store" }
+        {
+          "id": "a",
+          "text": "The launch of Sputnik 1"
+        },
+        {
+          "id": "b",
+          "text": "The Battle of Waterloo"
+        },
+        {
+          "id": "c",
+          "text": "The first iPhone"
+        },
+        {
+          "id": "d",
+          "text": "The Moon landing"
+        }
       ],
-      "correctOptionId": "a",
-      "explanation": "Electrical telegraphy was developed in the 19th century, long before smartphones.",
-      "sourceUrls": ["https://en.wikipedia.org/wiki/Telegraphy"]
+      "correctOptionId": "b",
+      "explanation": "Waterloo was fought in 1815, before the other events.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
     },
     {
-      "id": "history-002",
+      "id": "history-200-02",
       "category": "history",
-      "difficulty": "medium",
+      "pointValue": 200,
+      "difficulty": "easy",
       "type": "multiple-choice",
-      "prompt": "Who won the Battle of Waterloo in 1815?",
+      "prompt": "The Renaissance began in which country?",
       "media": null,
       "options": [
-        { "id": "a", "text": "The Seventh Coalition" },
-        { "id": "b", "text": "Napoleon's French Empire" },
-        { "id": "c", "text": "The Roman Empire" },
-        { "id": "d", "text": "The Ottoman Empire" }
+        {
+          "id": "a",
+          "text": "France"
+        },
+        {
+          "id": "b",
+          "text": "England"
+        },
+        {
+          "id": "c",
+          "text": "Italy"
+        },
+        {
+          "id": "d",
+          "text": "Germany"
+        }
       ],
-      "correctOptionId": "a",
-      "explanation": "Coalition forces led by Wellington and Blücher defeated Napoleon's army.",
-      "sourceUrls": ["https://en.wikipedia.org/wiki/Battle_of_Waterloo"]
+      "correctOptionId": "c",
+      "explanation": "The Renaissance began in Italy.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
     },
     {
-      "id": "coding-001",
+      "id": "history-200-03",
+      "category": "history",
+      "pointValue": 200,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Which event began in 1914?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "World War II"
+        },
+        {
+          "id": "b",
+          "text": "American Civil War"
+        },
+        {
+          "id": "c",
+          "text": "French Revolution"
+        },
+        {
+          "id": "d",
+          "text": "World War I"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "World War I began in 1914.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "history-200-04",
+      "category": "history",
+      "pointValue": 200,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Who wrote the Declaration of Independence's first draft?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Thomas Jefferson"
+        },
+        {
+          "id": "b",
+          "text": "Benjamin Franklin"
+        },
+        {
+          "id": "c",
+          "text": "George Washington"
+        },
+        {
+          "id": "d",
+          "text": "James Madison"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Thomas Jefferson drafted the Declaration of Independence.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "history-200-05",
+      "category": "history",
+      "pointValue": 200,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "The Berlin Wall fell in which year?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "1961"
+        },
+        {
+          "id": "b",
+          "text": "1989"
+        },
+        {
+          "id": "c",
+          "text": "1975"
+        },
+        {
+          "id": "d",
+          "text": "2001"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "The Berlin Wall fell in 1989.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "history-300-01",
+      "category": "history",
+      "pointValue": 300,
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "Julius Caesar was a leader in which ancient state?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Ottoman Empire"
+        },
+        {
+          "id": "b",
+          "text": "British Empire"
+        },
+        {
+          "id": "c",
+          "text": "Roman Republic"
+        },
+        {
+          "id": "d",
+          "text": "Mongol Empire"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Julius Caesar was a Roman statesman during the Roman Republic.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "history-300-02",
+      "category": "history",
+      "pointValue": 300,
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "What was the first artificial satellite launched into space?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Explorer 1"
+        },
+        {
+          "id": "b",
+          "text": "Apollo 11"
+        },
+        {
+          "id": "c",
+          "text": "Hubble"
+        },
+        {
+          "id": "d",
+          "text": "Sputnik 1"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "The Soviet Union launched Sputnik 1 in 1957.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "history-300-03",
+      "category": "history",
+      "pointValue": 300,
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "Which document signed in 1215 limited the English king's power?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Magna Carta"
+        },
+        {
+          "id": "b",
+          "text": "Bill of Rights"
+        },
+        {
+          "id": "c",
+          "text": "Emancipation Proclamation"
+        },
+        {
+          "id": "d",
+          "text": "Treaty of Versailles"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Magna Carta was sealed in 1215.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "history-300-04",
+      "category": "history",
+      "pointValue": 300,
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "The printing press is associated with which inventor?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Leonardo da Vinci"
+        },
+        {
+          "id": "b",
+          "text": "Johannes Gutenberg"
+        },
+        {
+          "id": "c",
+          "text": "Isaac Newton"
+        },
+        {
+          "id": "d",
+          "text": "James Watt"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Johannes Gutenberg developed a movable-type printing press in Europe.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "history-300-05",
+      "category": "history",
+      "pointValue": 300,
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "Which ancient city was buried by the eruption of Mount Vesuvius in 79 CE?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Athens"
+        },
+        {
+          "id": "b",
+          "text": "Carthage"
+        },
+        {
+          "id": "c",
+          "text": "Pompeii"
+        },
+        {
+          "id": "d",
+          "text": "Alexandria"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Pompeii was buried by Vesuvius.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "history-400-01",
+      "category": "history",
+      "pointValue": 400,
+      "difficulty": "hard",
+      "type": "multiple-choice",
+      "prompt": "Which treaty formally ended World War I?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Treaty of Paris"
+        },
+        {
+          "id": "b",
+          "text": "Treaty of Tordesillas"
+        },
+        {
+          "id": "c",
+          "text": "Camp David Accords"
+        },
+        {
+          "id": "d",
+          "text": "Treaty of Versailles"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "The Treaty of Versailles ended the war between Germany and the Allied Powers.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "history-400-02",
+      "category": "history",
+      "pointValue": 400,
+      "difficulty": "hard",
+      "type": "multiple-choice",
+      "prompt": "The Haitian Revolution resulted in Haiti gaining independence from which country?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "France"
+        },
+        {
+          "id": "b",
+          "text": "Spain"
+        },
+        {
+          "id": "c",
+          "text": "Britain"
+        },
+        {
+          "id": "d",
+          "text": "Portugal"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Haiti declared independence from France in 1804.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "history-400-03",
+      "category": "history",
+      "pointValue": 400,
+      "difficulty": "hard",
+      "type": "multiple-choice",
+      "prompt": "Which Chinese dynasty built much of the present-day Great Wall?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Qin dynasty"
+        },
+        {
+          "id": "b",
+          "text": "Ming dynasty"
+        },
+        {
+          "id": "c",
+          "text": "Han dynasty"
+        },
+        {
+          "id": "d",
+          "text": "Tang dynasty"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Much of the Great Wall visible today dates from the Ming dynasty.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "history-400-04",
+      "category": "history",
+      "pointValue": 400,
+      "difficulty": "hard",
+      "type": "multiple-choice",
+      "prompt": "Who was the first emperor of a unified China?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Kublai Khan"
+        },
+        {
+          "id": "b",
+          "text": "Confucius"
+        },
+        {
+          "id": "c",
+          "text": "Qin Shi Huang"
+        },
+        {
+          "id": "d",
+          "text": "Sun Yat-sen"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Qin Shi Huang unified China in 221 BCE.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "history-400-05",
+      "category": "history",
+      "pointValue": 400,
+      "difficulty": "hard",
+      "type": "multiple-choice",
+      "prompt": "The Industrial Revolution first began in which country?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "United States"
+        },
+        {
+          "id": "b",
+          "text": "Germany"
+        },
+        {
+          "id": "c",
+          "text": "Japan"
+        },
+        {
+          "id": "d",
+          "text": "Great Britain"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "The Industrial Revolution began in Great Britain.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "history-500-01",
+      "category": "history",
+      "pointValue": 500,
+      "difficulty": "expert",
+      "type": "multiple-choice",
+      "prompt": "Which 1492 voyage is associated with Christopher Columbus?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "A transatlantic voyage to the Caribbean"
+        },
+        {
+          "id": "b",
+          "text": "The first circumnavigation"
+        },
+        {
+          "id": "c",
+          "text": "A voyage to Australia"
+        },
+        {
+          "id": "d",
+          "text": "A route around Africa to India"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Columbus crossed the Atlantic and reached the Caribbean in 1492.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "history-500-02",
+      "category": "history",
+      "pointValue": 500,
+      "difficulty": "expert",
+      "type": "multiple-choice",
+      "prompt": "What was the main purpose of the ancient Roman aqueducts?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Moving armies"
+        },
+        {
+          "id": "b",
+          "text": "Transporting water"
+        },
+        {
+          "id": "c",
+          "text": "Growing crops"
+        },
+        {
+          "id": "d",
+          "text": "Printing books"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Roman aqueducts supplied water to towns and cities.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "history-500-03",
+      "category": "history",
+      "pointValue": 500,
+      "difficulty": "expert",
+      "type": "multiple-choice",
+      "prompt": "Which leader's assassination in 1914 helped trigger World War I?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Napoleon Bonaparte"
+        },
+        {
+          "id": "b",
+          "text": "Tsar Nicholas II"
+        },
+        {
+          "id": "c",
+          "text": "Archduke Franz Ferdinand"
+        },
+        {
+          "id": "d",
+          "text": "Winston Churchill"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "The assassination of Archduke Franz Ferdinand helped set off World War I.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "history-500-04",
+      "category": "history",
+      "pointValue": 500,
+      "difficulty": "expert",
+      "type": "multiple-choice",
+      "prompt": "Which West African city became famous as a center of learning under the Mali Empire?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Cairo"
+        },
+        {
+          "id": "b",
+          "text": "Carthage"
+        },
+        {
+          "id": "c",
+          "text": "Zanzibar"
+        },
+        {
+          "id": "d",
+          "text": "Timbuktu"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Timbuktu was an important center of trade and scholarship in Mali.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "history-500-05",
+      "category": "history",
+      "pointValue": 500,
+      "difficulty": "expert",
+      "type": "multiple-choice",
+      "prompt": "What does BCE stand for in historical dates?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Before Common Era"
+        },
+        {
+          "id": "b",
+          "text": "Before Christian Empire"
+        },
+        {
+          "id": "c",
+          "text": "British Colonial Era"
+        },
+        {
+          "id": "d",
+          "text": "Beginning of the Common Era"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "BCE means Before Common Era.",
+      "sourceUrls": [
+        "https://www.britannica.com/"
+      ]
+    },
+    {
+      "id": "coding-100-01",
       "category": "coding",
+      "pointValue": 100,
       "difficulty": "easy",
       "type": "multiple-choice",
       "prompt": "Which HTML element creates a hyperlink?",
       "media": null,
       "options": [
-        { "id": "a", "text": "<a>" },
-        { "id": "b", "text": "<p>" },
-        { "id": "c", "text": "<img>" },
-        { "id": "d", "text": "<link>" }
+        {
+          "id": "a",
+          "text": "<a>"
+        },
+        {
+          "id": "b",
+          "text": "<p>"
+        },
+        {
+          "id": "c",
+          "text": "<img>"
+        },
+        {
+          "id": "d",
+          "text": "<link>"
+        }
       ],
       "correctOptionId": "a",
-      "explanation": "The anchor element <a> creates a hyperlink when it has an href attribute.",
-      "sourceUrls": ["https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a"]
+      "explanation": "The anchor element creates hyperlinks when it uses href.",
+      "sourceUrls": [
+        "https://developer.mozilla.org/"
+      ]
     },
     {
-      "id": "coding-002",
+      "id": "coding-100-02",
       "category": "coding",
+      "pointValue": 100,
       "difficulty": "easy",
       "type": "multiple-choice",
-      "prompt": "Which CSS property changes the text color?",
+      "prompt": "Which CSS property changes an element's text color?",
       "media": null,
       "options": [
-        { "id": "a", "text": "color" },
-        { "id": "b", "text": "font-style" },
-        { "id": "c", "text": "background-image" },
-        { "id": "d", "text": "text-align" }
-      ],
-      "correctOptionId": "a",
-      "explanation": "The CSS color property sets an element's foreground text color.",
-      "sourceUrls": ["https://developer.mozilla.org/en-US/docs/Web/CSS/color"]
-    },
-    {
-      "id": "coding-003",
-      "category": "coding",
-      "difficulty": "easy",
-      "type": "multiple-choice",
-      "prompt": "What does this JavaScript expression return? 5 === '5'",
-      "media": null,
-      "options": [
-        { "id": "a", "text": "true" },
-        { "id": "b", "text": "false" },
-        { "id": "c", "text": "undefined" },
-        { "id": "d", "text": "It throws an error" }
+        {
+          "id": "a",
+          "text": "font-style"
+        },
+        {
+          "id": "b",
+          "text": "color"
+        },
+        {
+          "id": "c",
+          "text": "background-image"
+        },
+        {
+          "id": "d",
+          "text": "text-align"
+        }
       ],
       "correctOptionId": "b",
-      "explanation": "Strict equality compares value and type, so the number 5 is not strictly equal to the string '5'.",
-      "sourceUrls": ["https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality"]
+      "explanation": "The color property sets the foreground text color.",
+      "sourceUrls": [
+        "https://developer.mozilla.org/"
+      ]
     },
     {
-      "id": "coding-004",
+      "id": "coding-100-03",
       "category": "coding",
+      "pointValue": 100,
       "difficulty": "easy",
       "type": "multiple-choice",
-      "prompt": "Which HTML attribute specifies an image's file URL?",
+      "prompt": "What does the JavaScript expression 5 === '5' return?",
       "media": null,
       "options": [
-        { "id": "a", "text": "src" },
-        { "id": "b", "text": "href" },
-        { "id": "c", "text": "alt" },
-        { "id": "d", "text": "target" }
+        {
+          "id": "a",
+          "text": "true"
+        },
+        {
+          "id": "b",
+          "text": "undefined"
+        },
+        {
+          "id": "c",
+          "text": "false"
+        },
+        {
+          "id": "d",
+          "text": "It throws an error"
+        }
       ],
-      "correctOptionId": "a",
-      "explanation": "The src attribute provides the URL of the image resource; alt provides alternative text.",
-      "sourceUrls": ["https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img"]
+      "correctOptionId": "c",
+      "explanation": "Strict equality returns false for operands with different types.",
+      "sourceUrls": [
+        "https://developer.mozilla.org/"
+      ]
     },
     {
-      "id": "coding-005",
+      "id": "coding-100-04",
       "category": "coding",
-      "difficulty": "medium",
+      "pointValue": 100,
+      "difficulty": "easy",
       "type": "multiple-choice",
-      "prompt": "Which event fires when a user clicks an element?",
+      "prompt": "Which HTML attribute provides an image file URL?",
       "media": null,
       "options": [
-        { "id": "a", "text": "click" },
-        { "id": "b", "text": "changeColor" },
-        { "id": "c", "text": "hovered" },
-        { "id": "d", "text": "press" }
+        {
+          "id": "a",
+          "text": "href"
+        },
+        {
+          "id": "b",
+          "text": "alt"
+        },
+        {
+          "id": "c",
+          "text": "target"
+        },
+        {
+          "id": "d",
+          "text": "src"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "The src attribute specifies the image resource URL.",
+      "sourceUrls": [
+        "https://developer.mozilla.org/"
+      ]
+    },
+    {
+      "id": "coding-100-05",
+      "category": "coding",
+      "pointValue": 100,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Which JavaScript keyword declares a block-scoped variable that can be reassigned?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "let"
+        },
+        {
+          "id": "b",
+          "text": "const"
+        },
+        {
+          "id": "c",
+          "text": "return"
+        },
+        {
+          "id": "d",
+          "text": "function"
+        }
       ],
       "correctOptionId": "a",
-      "explanation": "The click event fires when an element is activated by a pointer click or an equivalent user action.",
-      "sourceUrls": ["https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event"]
+      "explanation": "let declares a block-scoped variable that may be reassigned.",
+      "sourceUrls": [
+        "https://developer.mozilla.org/"
+      ]
+    },
+    {
+      "id": "coding-200-01",
+      "category": "coding",
+      "pointValue": 200,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Which CSS selector targets every paragraph element?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": ".p"
+        },
+        {
+          "id": "b",
+          "text": "p"
+        },
+        {
+          "id": "c",
+          "text": "#p"
+        },
+        {
+          "id": "d",
+          "text": "*p"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "The type selector p matches paragraph elements.",
+      "sourceUrls": [
+        "https://developer.mozilla.org/"
+      ]
+    },
+    {
+      "id": "coding-200-02",
+      "category": "coding",
+      "pointValue": 200,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "What is the value of 2 + 3 * 4 in JavaScript?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "20"
+        },
+        {
+          "id": "b",
+          "text": "24"
+        },
+        {
+          "id": "c",
+          "text": "14"
+        },
+        {
+          "id": "d",
+          "text": "9"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Multiplication is evaluated before addition.",
+      "sourceUrls": [
+        "https://developer.mozilla.org/"
+      ]
+    },
+    {
+      "id": "coding-200-03",
+      "category": "coding",
+      "pointValue": 200,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Which HTML element is used for the largest heading by default?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "<head>"
+        },
+        {
+          "id": "b",
+          "text": "<header>"
+        },
+        {
+          "id": "c",
+          "text": "<title>"
+        },
+        {
+          "id": "d",
+          "text": "<h1>"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "h1 is the top-level heading element.",
+      "sourceUrls": [
+        "https://developer.mozilla.org/"
+      ]
+    },
+    {
+      "id": "coding-200-04",
+      "category": "coding",
+      "pointValue": 200,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "What does the CSS display: flex declaration create?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "A flex container"
+        },
+        {
+          "id": "b",
+          "text": "A grid container"
+        },
+        {
+          "id": "c",
+          "text": "A hidden element"
+        },
+        {
+          "id": "d",
+          "text": "A fixed-position element"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "display: flex makes an element a flex container.",
+      "sourceUrls": [
+        "https://developer.mozilla.org/"
+      ]
+    },
+    {
+      "id": "coding-200-05",
+      "category": "coding",
+      "pointValue": 200,
+      "difficulty": "easy",
+      "type": "multiple-choice",
+      "prompt": "Which event commonly fires when a user clicks an element?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "changeColor"
+        },
+        {
+          "id": "b",
+          "text": "click"
+        },
+        {
+          "id": "c",
+          "text": "hovered"
+        },
+        {
+          "id": "d",
+          "text": "press"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "The click event fires when an element is activated by a click or equivalent action.",
+      "sourceUrls": [
+        "https://developer.mozilla.org/"
+      ]
+    },
+    {
+      "id": "coding-300-01",
+      "category": "coding",
+      "pointValue": 300,
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "What does JSON stand for?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Java Source Object Network"
+        },
+        {
+          "id": "b",
+          "text": "Joined System Output Name"
+        },
+        {
+          "id": "c",
+          "text": "JavaScript Object Notation"
+        },
+        {
+          "id": "d",
+          "text": "JavaScript Oriented Number"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "JSON stands for JavaScript Object Notation.",
+      "sourceUrls": [
+        "https://developer.mozilla.org/"
+      ]
+    },
+    {
+      "id": "coding-300-02",
+      "category": "coding",
+      "pointValue": 300,
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "Which array method adds an item to the end of an array?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "pop()"
+        },
+        {
+          "id": "b",
+          "text": "shift()"
+        },
+        {
+          "id": "c",
+          "text": "slice()"
+        },
+        {
+          "id": "d",
+          "text": "push()"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "push() appends one or more items to an array.",
+      "sourceUrls": [
+        "https://developer.mozilla.org/"
+      ]
+    },
+    {
+      "id": "coding-300-03",
+      "category": "coding",
+      "pointValue": 300,
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "In CSS, which unit is relative to the root element's font size?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "rem"
+        },
+        {
+          "id": "b",
+          "text": "px"
+        },
+        {
+          "id": "c",
+          "text": "cm"
+        },
+        {
+          "id": "d",
+          "text": "vh"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "A rem is relative to the root element's font size.",
+      "sourceUrls": [
+        "https://developer.mozilla.org/"
+      ]
+    },
+    {
+      "id": "coding-300-04",
+      "category": "coding",
+      "pointValue": 300,
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "What does document.querySelector('.card') return?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Every matching element"
+        },
+        {
+          "id": "b",
+          "text": "The first element matching .card"
+        },
+        {
+          "id": "c",
+          "text": "A new card element"
+        },
+        {
+          "id": "d",
+          "text": "Only text inside cards"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "querySelector returns the first matching element, or null.",
+      "sourceUrls": [
+        "https://developer.mozilla.org/"
+      ]
+    },
+    {
+      "id": "coding-300-05",
+      "category": "coding",
+      "pointValue": 300,
+      "difficulty": "medium",
+      "type": "multiple-choice",
+      "prompt": "Which HTTP method is normally used to retrieve a resource?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "POST"
+        },
+        {
+          "id": "b",
+          "text": "DELETE"
+        },
+        {
+          "id": "c",
+          "text": "GET"
+        },
+        {
+          "id": "d",
+          "text": "PATCH"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "GET requests retrieve a representation of a resource.",
+      "sourceUrls": [
+        "https://developer.mozilla.org/"
+      ]
+    },
+    {
+      "id": "coding-400-01",
+      "category": "coding",
+      "pointValue": 400,
+      "difficulty": "hard",
+      "type": "multiple-choice",
+      "prompt": "What is the result of Boolean('') in JavaScript?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "true"
+        },
+        {
+          "id": "b",
+          "text": "undefined"
+        },
+        {
+          "id": "c",
+          "text": "An error"
+        },
+        {
+          "id": "d",
+          "text": "false"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "An empty string is falsy, so Boolean('') is false.",
+      "sourceUrls": [
+        "https://developer.mozilla.org/"
+      ]
+    },
+    {
+      "id": "coding-400-02",
+      "category": "coding",
+      "pointValue": 400,
+      "difficulty": "hard",
+      "type": "multiple-choice",
+      "prompt": "Which HTML attribute provides alternative text for an image?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "alt"
+        },
+        {
+          "id": "b",
+          "text": "src"
+        },
+        {
+          "id": "c",
+          "text": "href"
+        },
+        {
+          "id": "d",
+          "text": "id"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "The alt attribute supplies alternative text for an image.",
+      "sourceUrls": [
+        "https://developer.mozilla.org/"
+      ]
+    },
+    {
+      "id": "coding-400-03",
+      "category": "coding",
+      "pointValue": 400,
+      "difficulty": "hard",
+      "type": "multiple-choice",
+      "prompt": "What does the CSS box model include?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Only text and images"
+        },
+        {
+          "id": "b",
+          "text": "Content, padding, border, and margin"
+        },
+        {
+          "id": "c",
+          "text": "HTML tags only"
+        },
+        {
+          "id": "d",
+          "text": "JavaScript variables"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "The box model consists of content, padding, border, and margin.",
+      "sourceUrls": [
+        "https://developer.mozilla.org/"
+      ]
+    },
+    {
+      "id": "coding-400-04",
+      "category": "coding",
+      "pointValue": 400,
+      "difficulty": "hard",
+      "type": "multiple-choice",
+      "prompt": "What is a Promise in JavaScript used to represent?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "A CSS animation"
+        },
+        {
+          "id": "b",
+          "text": "An HTML form"
+        },
+        {
+          "id": "c",
+          "text": "An eventual asynchronous result"
+        },
+        {
+          "id": "d",
+          "text": "A database table"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "A Promise represents the eventual completion or failure of an asynchronous operation.",
+      "sourceUrls": [
+        "https://developer.mozilla.org/"
+      ]
+    },
+    {
+      "id": "coding-400-05",
+      "category": "coding",
+      "pointValue": 400,
+      "difficulty": "hard",
+      "type": "multiple-choice",
+      "prompt": "Which HTTP status code means 'Not Found'?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "200"
+        },
+        {
+          "id": "b",
+          "text": "301"
+        },
+        {
+          "id": "c",
+          "text": "500"
+        },
+        {
+          "id": "d",
+          "text": "404"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "HTTP 404 indicates that the server cannot find the requested resource.",
+      "sourceUrls": [
+        "https://developer.mozilla.org/"
+      ]
+    },
+    {
+      "id": "coding-500-01",
+      "category": "coding",
+      "pointValue": 500,
+      "difficulty": "expert",
+      "type": "multiple-choice",
+      "prompt": "What does the JavaScript Array.prototype.map() method return?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "A new array"
+        },
+        {
+          "id": "b",
+          "text": "The original array only"
+        },
+        {
+          "id": "c",
+          "text": "A Boolean"
+        },
+        {
+          "id": "d",
+          "text": "Always undefined"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "map() creates a new array from calling a function on each element.",
+      "sourceUrls": [
+        "https://developer.mozilla.org/"
+      ]
+    },
+    {
+      "id": "coding-500-02",
+      "category": "coding",
+      "pointValue": 500,
+      "difficulty": "expert",
+      "type": "multiple-choice",
+      "prompt": "Which CSS property controls the stacking order of positioned elements?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "opacity"
+        },
+        {
+          "id": "b",
+          "text": "z-index"
+        },
+        {
+          "id": "c",
+          "text": "overflow"
+        },
+        {
+          "id": "d",
+          "text": "transform"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "z-index controls stack level for positioned elements and flex/grid items.",
+      "sourceUrls": [
+        "https://developer.mozilla.org/"
+      ]
+    },
+    {
+      "id": "coding-500-03",
+      "category": "coding",
+      "pointValue": 500,
+      "difficulty": "expert",
+      "type": "multiple-choice",
+      "prompt": "What is event bubbling?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "A page reload"
+        },
+        {
+          "id": "b",
+          "text": "An event firing only once"
+        },
+        {
+          "id": "c",
+          "text": "An event propagating from a target toward its ancestors"
+        },
+        {
+          "id": "d",
+          "text": "A CSS transition"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Most DOM events bubble upward from the target through ancestor elements.",
+      "sourceUrls": [
+        "https://developer.mozilla.org/"
+      ]
+    },
+    {
+      "id": "coding-500-04",
+      "category": "coding",
+      "pointValue": 500,
+      "difficulty": "expert",
+      "type": "multiple-choice",
+      "prompt": "In JavaScript, what does the nullish coalescing operator (??) use as a fallback for?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "Any falsy value"
+        },
+        {
+          "id": "b",
+          "text": "Only false"
+        },
+        {
+          "id": "c",
+          "text": "Only zero"
+        },
+        {
+          "id": "d",
+          "text": "null or undefined"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "The ?? operator uses its right side only when the left side is null or undefined.",
+      "sourceUrls": [
+        "https://developer.mozilla.org/"
+      ]
+    },
+    {
+      "id": "coding-500-05",
+      "category": "coding",
+      "pointValue": 500,
+      "difficulty": "expert",
+      "type": "multiple-choice",
+      "prompt": "Which web storage API persists data after the browser is closed?",
+      "media": null,
+      "options": [
+        {
+          "id": "a",
+          "text": "localStorage"
+        },
+        {
+          "id": "b",
+          "text": "sessionStorage"
+        },
+        {
+          "id": "c",
+          "text": "navigator"
+        },
+        {
+          "id": "d",
+          "text": "history"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "localStorage data persists across browser sessions until it is cleared.",
+      "sourceUrls": [
+        "https://developer.mozilla.org/"
+      ]
     }
   ],
   "apiSources": {
-    "peopleMetadata": {
-      "provider": "Wikipedia REST API",
-      "exampleUrl": "https://en.wikipedia.org/api/rest_v1/page/summary/Albert_Einstein",
-      "notes": "Use the summary endpoint for a concise description and a thumbnail when available. Verify individual facts before generating scored questions."
-    },
-    "structuredFacts": {
-      "provider": "Wikidata Query Service",
-      "url": "https://query.wikidata.org/sparql",
-      "notes": "Useful for structured dates, occupations and relationships. Cache results; avoid querying it for every question."
-    },
-    "cartoonMetadata": {
-      "provider": "TMDB",
-      "url": "https://developer.themoviedb.org/docs",
-      "notes": "Requires an API key and attribution. Keep the key off a public frontend by using a small backend/serverless proxy, or manually export permitted data."
-    },
     "countryData": {
       "provider": "REST Countries",
-      "url": "https://restcountries.com/",
-      "notes": "Confirm the current endpoint/authentication and terms before implementation."
-    },
-    "countryShapes": {
-      "provider": "World Atlas / Natural Earth",
-      "url": "https://github.com/topojson/world-atlas",
-      "notes": "Use country polygon data to render selectable silhouettes. Match countries carefully, because names and disputed boundaries can vary between datasets."
-    },
-    "historicalImages": {
-      "provider": "Library of Congress API",
-      "url": "https://www.loc.gov/apis/json-and-yaml/",
-      "exampleSearchUrl": "https://www.loc.gov/photos/?q=rotary%20telephone&fo=json",
-      "notes": "Check rights and item-level metadata before redistributing or embedding an image."
+      "url": "https://restcountries.com/v3.1/all?fields=name,capital,region,currencies,languages,continents,population,area,independent",
+      "notes": "Use for country enrichment and cache verified facts locally."
     },
     "codingReference": {
       "provider": "MDN Web Docs",
       "url": "https://developer.mozilla.org/",
-      "notes": "Use for fact-checking HTML, CSS and JavaScript answers. Keep questions in the local bank so difficulty and distractors remain consistent."
+      "notes": "Use this primary reference for HTML, CSS, JavaScript, and Web API questions."
+    },
+    "peopleMetadata": {
+      "provider": "Wikidata Query Service",
+      "url": "https://query.wikidata.org/sparql",
+      "notes": "Useful for structured biographies; verify facts before publishing questions."
     }
   }
 }
