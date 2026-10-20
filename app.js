@@ -298,8 +298,7 @@ function timer() {
 
     if (timeLeft < 0) {
       clearInterval(timerId);
-      alert("Time's up!");
-      submitAnwser(usrAns);
+      submitAnwser(usrAns, true);
     }
   }, 1000);
 }
@@ -330,8 +329,14 @@ function getRandomQuestion(category, pointValue) {
   return questions[randomIndex];
 }
 
-function submitAnwser(usrAns) {
+function submitAnwser(usrAns, timedOut = false) {
   if (usrAns === undefined || usrAns === null) {
+    if (timedOut) {
+      alert("Time's up! Incorrect!");
+      window.location.href = "./game.html";
+      return;
+    }
+
     alert("Please select an answer first.");
     return;
   }
