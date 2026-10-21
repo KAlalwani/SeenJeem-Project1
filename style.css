@@ -163,7 +163,11 @@ button:active {
   transform: translateY(-5px) rotate(-1deg);
   box-shadow: 0 11px 0 #d946ef, 0 18px 28px rgba(168, 85, 247, 0.28);
 }
-
+.category.is-selected {
+  color: #fff;
+  background-color: #dc2626;
+  box-shadow: 0 8px 0 #b91c1c;
+}
 .category:nth-child(2n) {
   transform: rotate(1deg);
 }
@@ -381,7 +385,6 @@ main > .hero-section {
   font-weight: 900;
   text-align: center;
   background-color: var(--sj-violet);
-  border: 3px solid #fff;
   border-radius: 0.85rem;
   box-shadow: 0 5px 0 #d946ef;
   cursor: pointer;
@@ -559,6 +562,8 @@ main > .hero-section {
 
 .lifelines-container.Q .lifeline {
   min-height: 44px;
+  width: 7rem;
+  place-self: center;
 }
 
 .done-btn {

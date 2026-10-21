@@ -95,15 +95,9 @@ if (page === "question.html")
 
 // ===== Functions =====
 function selectCategory(event) {
-  console.log("select category");
-  let color = getComputedStyle(event.currentTarget).backgroundColor;
-  if (color === unSelectedColor) {
-    event.currentTarget.style.backgroundColor = "red";
-    selectedCount++;
-  } else {
-    event.currentTarget.style.backgroundColor = "violet";
-    selectedCount--;
-  }
+  const category = event.currentTarget;
+  const isSelected = category.classList.toggle("is-selected");
+  selectedCount += isSelected ? 1 : -1;
   console.log(selectedCount);
 }
 
@@ -125,10 +119,13 @@ function selectQ(event) {
 
   setJSON("answeringTeam", team1);
 
-  cell.style.backgroundColor = team1 ? "green" : "yellow";
+  cell.style.backgroundColor = team1 ? "green" : "orange";
+  cell.style.boxShadow = team1 ? "0 8px 0 darkgreen" : "0 8px 0 darkgoldenrod";
+  cell.style.color = "#fff";
+
   used.push({
     index: cellIndex,
-    color: team1 ? "green" : "yellow",
+    color: team1 ? "green" : "orange",
   });
 
   setJSON("usedQuestions", used);
@@ -144,7 +141,9 @@ function selectQ(event) {
 }
 
 function normalizeCategory(category) {
-  const normalized = String(category || "").trim().toLowerCase();
+  const normalized = String(category || "")
+    .trim()
+    .toLowerCase();
   const aliases = {
     cartoon: "cartoons",
     cartoons: "cartoons",
@@ -162,7 +161,8 @@ function selectChoice(event) {
   usrAns = Array.from(QChoiceElement).indexOf(event.currentTarget);
   console.log(usrAns);
   for (let i = 0; i < 4; i++) {
-    if (usrAns === i) QChoiceElement.item(i).style.backgroundColor = "green";
+    if (usrAns === i)
+      QChoiceElement.item(i).style.backgroundColor = "lightblue";
     else QChoiceElement.item(i).style.backgroundColor = "blanchedalmond";
   }
 }
@@ -189,9 +189,15 @@ function roundDisplay() {
 
 function restoreCells() {
   getJSON("usedQuestions", []).forEach(({ index, color }) => {
-    if (QElement[index]) QElement[index].style.backgroundColor = color;
+    if (QElement[index]) {
+      QElement[index].style.backgroundColor = color;
+      QElement[index].style.color = "#fff";
+      QElement[index].style.boxShadow =
+        color === "green" ? "0 8px 0 darkgreen" : "0 8px 0 darkorange";
+    }
   });
 }
+
 
 function checkGameSettings() {
   pointsAmountElement.disabled = !pointsCheckBoxElement.checked;
@@ -205,7 +211,8 @@ function question() {
   const questionData = getRandomQuestion(category, pointValue);
 
   if (!questionData) {
-    questionElement.textContent = "No question is available for this board cell.";
+    questionElement.textContent =
+      "No question is available for this board cell.";
     return;
   }
   questionElement.innerHTML = questionData.prompt;
@@ -362,8 +369,8 @@ function nextPage() {
   if (page === "index.html") {
     if (selectedCount === 5) {
       const names = Array.from(categoryElement)
-        .filter((el) => el.style.backgroundColor === selectedColor)
-        .map((el) => el.innerText);
+        .filter((el) => el.classList.contains("is-selected"))
+        .map((el) => el.innerText.trim());
       setJSON("categories", names);
 
       selectedCount = 0;
